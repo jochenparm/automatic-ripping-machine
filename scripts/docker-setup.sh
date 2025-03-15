@@ -30,43 +30,43 @@ function install_reqs() {
     apt install -y curl lsscsi
 }
 
-function add_arm_user() {
-    echo -e "${RED}Adding arm user${NC}"
-    # create arm group if it doesn't already exist
-    if ! [[ "$(getent group arm)" ]]; then
-        groupadd arm
+function add_fadr_user() {
+    echo -e "${RED}Adding fadr user${NC}"
+    # create fadr group if it doesn't already exist
+    if ! [[ "$(getent group fadr)" ]]; then
+        groupadd fadr
     else
-        echo -e "${RED}arm group already exists, skipping...${NC}"
+        echo -e "${RED}fadr group already exists, skipping...${NC}"
     fi
 
-    # create arm user if it doesn't already exist
-    if ! id arm >/dev/null 2>&1; then
-        useradd -m arm -g arm
-        passwd arm
+    # create fadr user if it doesn't already exist
+    if ! id fadr >/dev/null 2>&1; then
+        useradd -m fadr -g fadr
+        passwd fadr
     else
-        echo -e "${RED}arm user already exists, skipping...${NC}"
+        echo -e "${RED}fadr user already exists, skipping...${NC}"
     fi
-    usermod -aG cdrom,video arm
+    usermod -aG cdrom,video fadr
 }
 
 function launch_setup() {
     # install docker
     if [ -e /usr/bin/docker ]; then
         echo -e "${RED}Docker installation detected, skipping...${NC}"
-        echo -e "${RED}Adding user arm to docker user group${NC}"
-        usermod -aG docker arm
+        echo -e "${RED}Adding user fadr to docker user group${NC}"
+        usermod -aG docker fadr
     else
         echo -e "${RED}Installing Docker${NC}"
         # the convenience script auto-detects OS and handles install accordingly
         curl -sSL https://get.docker.com | bash
-        echo -e "${RED}Adding user arm to docker user group${NC}"
-        usermod -aG docker arm
+        echo -e "${RED}Adding user fadr to docker user group${NC}"
+        usermod -aG docker fadr
     fi
 }
 
 function pull_image() {
     echo -e "${RED}Pulling image from $IMAGE${NC}"
-    sudo -u arm docker pull "$IMAGE"
+    sudo -u fadr docker pull "$IMAGE"
 }
 
 function setup_mountpoints() {
@@ -74,29 +74,29 @@ function setup_mountpoints() {
     for dev in /dev/sr?; do
         mkdir -p "/mnt$dev"
     done
-    chown arm:arm /mnt/dev/sr*
+    chown fadr:fadr /mnt/dev/sr*
 }
 
 function save_start_command() {
-    url="https://raw.githubusercontent.com/automatic-ripping-machine/automatic-ripping-machine/main/scripts/docker/start_arm_container.sh"
-    cd ~arm
-    if [ -e start_arm_container.sh ]
+    url="https://raw.githubusercontent.com/automatic-ripping-machine/automatic-ripping-machine/main/scripts/docker/start_fadr_container.sh"
+    cd ~fadr
+    if [ -e start_fadr_container.sh ]
     then
-        echo -e "'start_arm_container.sh' already exists. Backing up..."
-        sudo mv ./start_arm_container.sh ./start_arm_container.sh.bak
+        echo -e "'start_fadr_container.sh' already exists. Backing up..."
+        sudo mv ./start_fadr_container.sh ./start_fadr_container.sh.bak
     fi
-    sudo -u arm curl -fsSL "$url" -o start_arm_container.sh
-    chmod +x start_arm_container.sh
-    sed -i "s|IMAGE_NAME|${IMAGE}|" start_arm_container.sh
+    sudo -u fadr curl -fsSL "$url" -o start_fadr_container.sh
+    chmod +x start_fadr_container.sh
+    sed -i "s|IMAGE_NAME|${IMAGE}|" start_fadr_container.sh
 }
 
 
 # start here
 install_reqs
-add_arm_user
+add_fadr_user
 launch_setup
 pull_image
 setup_mountpoints
 save_start_command
 
-echo -e "${RED}Installation complete. A template command to run the ARM container is located in: $(echo ~arm) ${NC}"
+echo -e "${RED}Installation complete. A template command to run the FADR container is located in: $(echo ~fadr) ${NC}"

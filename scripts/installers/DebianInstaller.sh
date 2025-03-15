@@ -46,10 +46,10 @@ readonly ERROR_USER_DID_NOT_ACCEPT_SCRIPT_DISCLAIMER=205
 readonly ERROR_SUDO_NOT_INSTALLED=206
 readonly ERROR_SCRIPT_PORT_OPTION_INVALID=207
 readonly ERROR_SCRIPT_UNKNOWN_OPTION=208
-readonly ERROR_FOUND_ARM_DIRECTORY_COULD_NOT_PROCEED=209
+readonly ERROR_FOUND_FADR_DIRECTORY_COULD_NOT_PROCEED=209
 readonly ERROR_GIT_REPO_FORK_DOES_NOT_EXIST=211
 readonly ERROR_GIT_REPO_TAG_DOES_NOT_EXIST=212
-readonly ERROR_FOUND_ACTIVE_ARMUI_SERVICE=213
+readonly ERROR_FOUND_ACTIVE_FADRUI_SERVICE=213
 readonly ERROR_FOUND_INACTIVE_AMRUI_SERVICE_USER_DECLINED_TO_CONTINUE=214
 
 
@@ -67,12 +67,12 @@ readonly ERROR_FOUND_INACTIVE_AMRUI_SERVICE_USER_DECLINED_TO_CONTINUE=214
 #Accepts one Parameter, ERROR_CODE an integer representing the error code generated.
 function usage() {
   local ERROR_CODE=${1}
-  UsageMessage="\nDebian 12 ARM Installer Script
+  UsageMessage="\nDebian 12 FADR Installer Script
 
 Usage: ./Debian12Installer.sh [-f <Fork_Name>] [-t <Tag_or_Branch_Name>] [-p <Port_Number>] [-h] [-H]
 
 -f  <Fork_Name>
-   The name of the fork or Automatic Ripping Machine to use for the installation
+   The name of the fork or Fully Automated Disc Ripper to use for the installation
    ***The Fork must be available publicly on GitHub***
    Default: \"automatic-ripping-machine\"
 
@@ -81,7 +81,7 @@ Usage: ./Debian12Installer.sh [-f <Fork_Name>] [-t <Tag_or_Branch_Name>] [-p <Po
    Default: \"latest\"
 
 -p <Port_Number>
-  The port number to use to access ARM
+  The port number to use to access FADR
   **Must be greater than or equal to 1024**
   **Must be less than or equal to 65535**
   Default: 8080
@@ -152,7 +152,7 @@ done
 #         Script eligibility functions            #
 ###################################################
 
-#This script installs ARM in an unsupported and untested environment.
+#This script installs FADR in an unsupported and untested environment.
 #The task of supporting every environment is too great for the dev team. Therefore
 #inform the user that while this script does exist, if any bugs appear as a result of
 #it's use, the user must be able to reproduce the bug in the Docker Official Image
@@ -164,19 +164,19 @@ function UserAcceptedConditions() {
   Disclaimer="${RED}
 ************************************************************************************************************************
 ** ${NC}                                                                                                                   ${RED}**
-** ${GREEN}                                           Automatic Ripping Machine (ARM)                                         ${RED}**
+** ${GREEN}                                           Fully Automated Disc Ripper (FADR)                                         ${RED}**
 ** ${GREEN}                                           Installation Script for Debian                                          ${RED}**
-** ${YELLOW}  WARNING - ${NC}This installation method is no longer supported by the ARM development team. This script is provided   ${RED}**
-** ${NC} as is, without support.  If you experience issues with your ARM installation, you will need to reproduce it using ${RED}**
-** ${NC} an official ARM docker image before opening up an Issue on GitHub.  The installation instructions for ARM using   ${RED}**
+** ${YELLOW}  WARNING - ${NC}This installation method is no longer supported by the FADR development team. This script is provided   ${RED}**
+** ${NC} as is, without support.  If you experience issues with your FADR installation, you will need to reproduce it using ${RED}**
+** ${NC} an official FADR docker image before opening up an Issue on GitHub.  The installation instructions for FADR using   ${RED}**
 ** ${NC} Docker can be found here: https://github.com/automatic-ripping-machine/automatic-ripping-machine/wiki/docker      ${RED}**
 ** ${NC}                                                                                                                   ${RED}**
-** ${NC} ARM uses MakeMKV. As of January 2025, MakeMKV is still in Beta and free to use while in Beta.                     ${RED}**
+** ${NC} FADR uses MakeMKV. As of January 2025, MakeMKV is still in Beta and free to use while in Beta.                     ${RED}**
 ** ${NC} You may, optionally, purchase a licence for MakeMKV at https://makemkv.com/buy/ Once purchased, you can go into   ${RED}**
-** ${NC} the ARM settings and paste in your key.  Instructions for entering your permanent key for MakeMKV in ARM can      ${RED}**
+** ${NC} the FADR settings and paste in your key.  Instructions for entering your permanent key for MakeMKV in FADR can      ${RED}**
 ** ${NC} be found here: https://github.com/automatic-ripping-machine/automatic-ripping-machine/wiki/MakeMKV-Info           ${RED}**
 ** ${NC}                                                                                                                   ${RED}**
-** ${NC} ARM is Open Source software licenced with the MIT licence:                                                        ${RED}**
+** ${NC} FADR is Open Source software licenced with the MIT licence:                                                        ${RED}**
 ** ${NC} https://github.com/automatic-ripping-machine/automatic-ripping-machine/blob/main/LICENSE                          ${RED}**
 ** ${NC}                                                                                                                   ${RED}**
 ************************************************************************************************************************
@@ -408,29 +408,29 @@ function ServiceExists() {
 
 function FoundPreviousInstallation() {
   ##TODO There is an error here that I need to track down.
-  if ServiceExists armui  ; then
-    echo "Found Armui Service"
-    if systemctl is-active --quiet armui ; then
-      echo -e "${RED}The installation script found that there is an armui service running under SystemD. Which seems
-to indicate that you are currently running an ARM installation and it is active.  It is recommended to not run
-the installation script on a machine that is already running ARM.  It may have unpredictable effects.  However,
-if you wish to continue, you must first manually stop and disable the armui service and run this script again.
-Doing so will erase your /opt/arm directory to install a fresh copy, and you may loose your configurations as
+  if ServiceExists fadrui  ; then
+    echo "Found FADRui Service"
+    if systemctl is-active --quiet fadrui ; then
+      echo -e "${RED}The installation script found that there is an fadrui service running under SystemD. Which seems
+to indicate that you are currently running an FADR installation and it is active.  It is recommended to not run
+the installation script on a machine that is already running FADR.  It may have unpredictable effects.  However,
+if you wish to continue, you must first manually stop and disable the fadrui service and run this script again.
+Doing so will erase your /opt/fadr directory to install a fresh copy, and you may loose your configurations as
 well. ${NC}"
-      exit ${ERROR_FOUND_ACTIVE_ARMUI_SERVICE}
+      exit ${ERROR_FOUND_ACTIVE_FADRUI_SERVICE}
     fi
 
-    Prompt="${YELLOW}WARNING, Found the armui service in SystemD but it is currently inactive.  Proceeding with this
+    Prompt="${YELLOW}WARNING, Found the fadrui service in SystemD but it is currently inactive.  Proceeding with this
 installation may have unpredictable effects and is not recommended.
 
 ${BLUE}Do you wish to proceed? Y/n ${NC}"
 
     if IsUserAnsweredYesToPrompt "${Prompt}" ; then
-      if [[ -d "/opt/arm" ]] ; then
-        echo "Found Arm Installation Directory"
-        AlertUserOfExistenceOfAmrDirectory="${YELLOW}WARNING, the script found that the directory /opt/arm already exists.
-If you are attempting to update your arm installation, please us git to checkout the latest release.
-In order to proceed, this script needs to delete the /opt/arm directory and checkout a fresh copy of arm
+      if [[ -d "/opt/fadr" ]] ; then
+        echo "Found FADR Installation Directory"
+        AlertUserOfExistenceOfAmrDirectory="${YELLOW}WARNING, the script found that the directory /opt/fadr already exists.
+If you are attempting to update your fadr installation, please us git to checkout the latest release.
+In order to proceed, this script needs to delete the /opt/fadr directory and checkout a fresh copy of fadr
 from the GitHub repository.  This is a non-reversible change.
 
 ${BLUE}Do you wish to Continue? Y/n :${NC}"
@@ -442,7 +442,7 @@ ${BLUE}Do you wish to Continue? Y/n :${NC}"
           fi
         else
           echo -e "${RED} Exiting Script...${NC}"
-          exit ${ERROR_FOUND_ARM_DIRECTORY_COULD_NOT_PROCEED}
+          exit ${ERROR_FOUND_FADR_DIRECTORY_COULD_NOT_PROCEED}
         fi
       fi
     else
@@ -463,64 +463,64 @@ ${BLUE}Do you wish to Continue? Y/n :${NC}"
 ###################################################
 
 #Call all user and group related functions.
-function CreateArmUserAndGroup() {
-  echo -e "${YELLOW}Adding arm user & group${NC}"
-  if (CreateArmGroup && CreateArmUser) ; then
-    PasswordProtectArmUser true
+function CreateFADRUserAndGroup() {
+  echo -e "${YELLOW}Adding fadr user & group${NC}"
+  if (CreateFADRGroup && CreateFADRUser) ; then
+    PasswordProtectFADRUser true
   else
-    PasswordProtectArmUser false
+    PasswordProtectFADRUser false
   fi
-  MakeArmUserPartOfRequiredGroups
+  MakeFADRUserPartOfRequiredGroups
 }
 
 #If the group exists, do nothing, if it does not exist create it.
-function CreateArmGroup() {
+function CreateFADRGroup() {
   echo "Creating Groups...."
-  if ! [[ $(getent group arm) ]]; then
-    groupadd arm
-    echo -e "${GREEN}Group 'arm' successfully created. \n${NC}"
+  if ! [[ $(getent group fadr) ]]; then
+    groupadd fadr
+    echo -e "${GREEN}Group 'fadr' successfully created. \n${NC}"
     true
   else
-    echo -e "${GREEN}'arm' group already exists, skipping...\n${NC}"
+    echo -e "${GREEN}'fadr' group already exists, skipping...\n${NC}"
     false
   fi
 }
 
 #If user exists, do nothing, if it does not exist create the user with default settings.
-function CreateArmUser() {
-  if ! id arm > /dev/null 2>&1 ; then
-    useradd -m arm -g arm -s /bin/bash -c "Automatic Ripping Machine"
-    echo -e "${GREEN}User 'arm' successfully created. \n${NC}"
+function CreateFADRUser() {
+  if ! id fadr > /dev/null 2>&1 ; then
+    useradd -m fadr -g fadr -s /bin/bash -c "Fully Automated Disc Ripper"
+    echo -e "${GREEN}User 'fadr' successfully created. \n${NC}"
     true
   else
-    echo -e "${GREEN}'arm' user already exists, skipping creation...${NC}"
+    echo -e "${GREEN}'fadr' user already exists, skipping creation...${NC}"
     false
   fi
 }
 
-function DeleteArmUser() {
-  userdel arm
-  rm -R /home/arm
+function DeleteFADRUser() {
+  userdel fadr
+  rm -R /home/fadr
 }
 
-# Make sure the 'arm' user is part of the 'cdrom', 'video' and 'render' groups.
-function MakeArmUserPartOfRequiredGroups() {
-  usermod -aG cdrom,video,render arm
+# Make sure the 'fadr' user is part of the 'cdrom', 'video' and 'render' groups.
+function MakeFADRUserPartOfRequiredGroups() {
+  usermod -aG cdrom,video,render fadr
 }
 
 #Give the User the option of setting a custom password.  The User may decline, in which event
 #a default password of value '1234' is created.
 #If the default password value is used, advise the user to change the password at the next opportunity.
-function PasswordProtectArmUser() {
+function PasswordProtectFADRUser() {
   local NewUser=$1
   #Determine what the password is going to be and save it in the variables $Password_1 & $Password_2
   #Make these variables explicitly local, to prevent the variables escaping this function.
   local Password_1=''
   local Password_2=''
   if $NewUser ; then
-    PasswordQuestion="${BLUE}Do you wish to provide a custom password for the 'arm' user? Y/n : ${NC}"
+    PasswordQuestion="${BLUE}Do you wish to provide a custom password for the 'fadr' user? Y/n : ${NC}"
   else
-    PasswordQuestion="${BLUE}The 'arm' user was already on the system.
+    PasswordQuestion="${BLUE}The 'fadr' user was already on the system.
 Do you wish to change it's password? Y/n : ${NC}"
   fi
   if IsUserAnsweredYesToPrompt "${PasswordQuestion}" ; then
@@ -542,10 +542,10 @@ Do you wish to change it's password? Y/n : ${NC}"
       #This is the 3rd attempt.  Exit script.
       echo -e "${RED}\nThe Passwords did not match 3 consecutive times, exiting...\n${NC}"
       if $NewUser ; then
-        echo -e "${YELLOW}Deleting newly created arm User Account.\n${NC}"
-        DeleteArmUser
+        echo -e "${YELLOW}Deleting newly created fadr User Account.\n${NC}"
+        DeleteFADRUser
       else
-        echo -e "${YELLOW}Password for the arm user was not changed.\n${NC}"
+        echo -e "${YELLOW}Password for the fadr user was not changed.\n${NC}"
       fi
       exit ${ERROR_USER_PROVIDED_PASSWORD_MISMATCH}
     fi
@@ -555,7 +555,7 @@ Do you wish to change it's password? Y/n : ${NC}"
     Password_2=1234
   fi
   if ($NewUser) || (! $NewUser && $PasswordConfirmed); then
-    echo -e "${Password_1}\n${Password_2}\n" | passwd -q arm > /dev/null 2>&1
+    echo -e "${Password_1}\n${Password_2}\n" | passwd -q fadr > /dev/null 2>&1
   fi
 
 }
@@ -590,14 +590,14 @@ function InstallMakeMKVBuildEnvironment() {
 }
 
 function BuildAndInstallMakeMKV() {
-  local ArmUserHomeFolder=~arm
+  local FADRUserHomeFolder=~fadr
   local LatestMakeMKVVersion
   local MakeMKVBuildFilesDirectory
   local cpuCount
 
-  ArmUserHomeFolder=~arm
+  FADRUserHomeFolder=~fadr
   LatestMakeMKVVersion=$(curl -s https://www.makemkv.com/download/ | grep -o '[0-9.]*.txt' | sed 's/.txt//')
-  MakeMKVBuildFilesDirectory="${ArmUserHomeFolder}"/MakeMKVBuildFiles/"${LatestMakeMKVVersion}"
+  MakeMKVBuildFilesDirectory="${FADRUserHomeFolder}"/MakeMKVBuildFiles/"${LatestMakeMKVVersion}"
   cpuCount=$(nproc --all)
 
   mkdir -p "${MakeMKVBuildFilesDirectory}"
@@ -625,7 +625,7 @@ function BuildAndInstallMakeMKV() {
   make -s -j"${cpuCount}"
   make install
 
-  chown -R arm:arm "${MakeMKVBuildFilesDirectory}"
+  chown -R fadr:fadr "${MakeMKVBuildFilesDirectory}"
 }
 
 ###################################################
@@ -681,12 +681,12 @@ function InstallHandBrakeCLIBuildEnvironment() {
 }
 
 function BuildAndInstallHandBrakeCLI() {
-  local ArmUserHomeFolder=~arm
+  local FADRUserHomeFolder=~fadr
   local HandBrakeCLIBuildFilesDirectory
   local cpuCount
 
-  ArmUserHomeFolder=~arm
-  HandBrakeCLIBuildFilesDirectory="${ArmUserHomeFolder}"/HandBrakeCLIBuildFiles/
+  FADRUserHomeFolder=~fadr
+  HandBrakeCLIBuildFilesDirectory="${FADRUserHomeFolder}"/HandBrakeCLIBuildFiles/
   cpuCount=$(nproc --all)
 
   mkdir -p "${HandBrakeCLIBuildFilesDirectory}"
@@ -698,10 +698,10 @@ function BuildAndInstallHandBrakeCLI() {
 }
 
 ###################################################
-#           Install Arm Dependencies              #
+#           Install FADR Dependencies              #
 ###################################################
 
-function InstallArmDependencies() {
+function InstallFADRDependencies() {
   apt install -y  abcde \
                   at \
                   cdparanoia \
@@ -726,16 +726,16 @@ function InstallArmDependencies() {
 }
 
 ###################################################
-#                Download Arm                     #
+#                Download FADR                     #
 ###################################################
 
-function DownloadArm () {
+function DownloadFADR () {
   local AlertUserOfExistenceOfAmrDirectory
-  local ExistingArmYamlFile
+  local ExistingFADRYamlFile
   local ExistingAbcdeConfFile
   local ExistingAppriseYamlFile
 
-  #Get current version number of ARM
+  #Get current version number of FADR
   if [[ ${Tag} == 'latest' ]] ; then
     Tag=$(curl --silent 'https://github.com/automatic-ripping-machine/automatic-ripping-machine/releases' \
                         | grep 'automatic-ripping-machine/tree/*' | head -n 1 | sed -e 's/[^0-9\.]*//g')
@@ -745,18 +745,18 @@ function DownloadArm () {
 
   if $PreviousInstallationFound ; then
 
-    ExistingArmYamlFile="/etc/arm/config/arm.yaml"
-    ExistingAbcdeConfFile="/etc/arm/config/abcde.conf"
-    ExistingAppriseYamlFile="/etc/arm/config/apprise.yaml"
+    ExistingFADRYamlFile="/etc/fadr/config/fadr.yaml"
+    ExistingAbcdeConfFile="/etc/fadr/config/abcde.conf"
+    ExistingAppriseYamlFile="/etc/fadr/config/apprise.yaml"
 
     if [[ -f ${ExistingAbcdeConfFile} ]] && [[ "${UseExistingConfigFiles}" = false ]] ; then
       echo "Backing up ABCDE.conf"
       cp "${ExistingAbcdeConfFile}" "${ExistingAbcdeConfFile}.bck"
     fi
 
-    if [[ -f ${ExistingArmYamlFile} ]] && [[ "${UseExistingConfigFiles}" = false ]] ; then
-      echo "Backing up ARM.Yaml"
-      cp "${ExistingArmYamlFile}" "${ExistingArmYamlFile}.bck"
+    if [[ -f ${ExistingFADRYamlFile} ]] && [[ "${UseExistingConfigFiles}" = false ]] ; then
+      echo "Backing up FADR.Yaml"
+      cp "${ExistingFADRYamlFile}" "${ExistingFADRYamlFile}.bck"
     fi
 
     if [[ -f ${ExistingAppriseYamlFile} ]] && [[ "${UseExistingConfigFiles}" = false ]] ; then
@@ -764,62 +764,62 @@ function DownloadArm () {
       cp "${ExistingAppriseYamlFile}" "${ExistingAppriseYamlFile}.bck"
     fi
 
-    echo -e "${RED} Deleting /opt/arm directory...${NC}"
-    rm -R /opt/arm
+    echo -e "${RED} Deleting /opt/fadr directory...${NC}"
+    rm -R /opt/fadr
 
   fi
 
   #Clone git repo, pin to latest release tag
 
-  mkdir arm
-  chown -R arm:arm arm
+  mkdir fadr
+  chown -R fadr:fadr fadr
 
-  sudo -u arm git clone --recurse-submodules --branch "${Tag}" \
-    "https://github.com/${Fork}/automatic-ripping-machine"  arm
+  sudo -u fadr git clone --recurse-submodules --branch "${Tag}" \
+    "https://github.com/${Fork}/automatic-ripping-machine"  fadr
 
 
   #Copy clean copies of config files to etc folder.
-  mkdir -p /etc/arm/config
+  mkdir -p /etc/fadr/config
 
   if ! $UseExistingConfigFiles ; then
     echo "Copying Clean Config Files"
-    cp /opt/arm/setup/arm.yaml /etc/arm/config/arm.yaml
-    cp /opt/arm/setup/apprise.yaml /etc/arm/config/apprise.yaml
-    cp /opt/arm/setup/.abcde.conf /etc/arm/config/abcde.conf
+    cp /opt/fadr/setup/fadr.yaml /etc/fadr/config/fadr.yaml
+    cp /opt/fadr/setup/apprise.yaml /etc/fadr/config/apprise.yaml
+    cp /opt/fadr/setup/.abcde.conf /etc/fadr/config/abcde.conf
   fi
 
   if $PortFlag ; then
-    echo -e "${RED}Non-default port specified, updating arm config...${NC}"
+    echo -e "${RED}Non-default port specified, updating fadr config...${NC}"
     # replace the default 8080 port with the specified port
-    sudo sed -e s"/\(^WEBSERVER_PORT:\) 8080/\1 ${Port}/" -i /etc/arm/config/arm.yaml
+    sudo sed -e s"/\(^WEBSERVER_PORT:\) 8080/\1 ${Port}/" -i /etc/fadr/config/fadr.yaml
   fi
 
   #Fix File and Folder Permissions
-  #chown -R arm:arm /opt/arm
-  find /opt/arm/scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
-  chown -R arm:arm /etc/arm
+  #chown -R fadr:fadr /opt/fadr
+  find /opt/fadr/scripts/ -type f -iname "*.sh" -exec chmod +x {} \;
+  chown -R fadr:fadr /etc/fadr
 
-  #Copy clean copies of the config files to /etc/arm/config/*.default
+  #Copy clean copies of the config files to /etc/fadr/config/*.default
   #This is so that the user can find clean versions of each of the config files for references.
   #It helps incase of a broken config file due to error, or some future update changes.
 
   #Remove old (and possibly outdated) config default files.
-  rm -f /etc/arm/config/*.default
+  rm -f /etc/fadr/config/*.default
 
-  cp /opt/arm/setup/arm.yaml /etc/arm/config/arm.yaml.default
-  cp /opt/arm/setup/apprise.yaml /etc/arm/config/apprise.yaml.default
-  cp /opt/arm/setup/.abcde.conf /etc/arm/config/abcde.conf.default
+  cp /opt/fadr/setup/fadr.yaml /etc/fadr/config/fadr.yaml.default
+  cp /opt/fadr/setup/apprise.yaml /etc/fadr/config/apprise.yaml.default
+  cp /opt/fadr/setup/.abcde.conf /etc/fadr/config/abcde.conf.default
 }
 
-function CreatePythonVirtualEnvironmentAndInstallArmPythonDependencies() {
-  cd /opt/arm
-  sudo -u arm python3 -m venv venv
-  sudo -u arm /opt/arm/venv/bin/pip3 install wheel
-  sudo -u arm /opt/arm/venv/bin/pip3 install -r requirements.txt
+function CreatePythonVirtualEnvironmentAndInstallFADRPythonDependencies() {
+  cd /opt/fadr
+  sudo -u fadr python3 -m venv venv
+  sudo -u fadr /opt/fadr/venv/bin/pip3 install wheel
+  sudo -u fadr /opt/fadr/venv/bin/pip3 install -r requirements.txt
 }
 
 function CreateUDEVRules() {
-  ln -sf /opt/arm/setup/51-automatic-ripping-machine-venv.rules /lib/udev/rules.d/
+  ln -sf /opt/fadr/setup/51-fully-automated-disc-ripper-venv.rules /lib/udev/rules.d/
 }
 
 function MountDrives() {
@@ -837,23 +837,23 @@ function MountDrives() {
 }
 
 function SetupFolders() {
-  sudo -u arm mkdir -p ~arm/logs/
-  sudo -u arm mkdir -p ~arm/logs/progress/
-  sudo -u arm mkdir -p ~arm/media/transcode/
-  sudo -u arm mkdir -p ~arm/media/completed/
-  sudo -u arm mkdir -p ~arm/media/raw/
+  sudo -u fadr mkdir -p ~fadr/logs/
+  sudo -u fadr mkdir -p ~fadr/logs/progress/
+  sudo -u fadr mkdir -p ~fadr/media/transcode/
+  sudo -u fadr mkdir -p ~fadr/media/completed/
+  sudo -u fadr mkdir -p ~fadr/media/raw/
 }
 
 function CreateAndStartService() {
-  echo -e "${RED}Installing ARM service${NC}"
-  cp /opt/arm/setup/arm.service /lib/systemd/system/armui.service
+  echo -e "${RED}Installing FADR service${NC}"
+  cp /opt/fadr/setup/fadr.service /lib/systemd/system/fadrui.service
   systemctl daemon-reload
-  systemctl enable armui
-  systemctl start armui
+  systemctl enable fadrui
+  systemctl start fadrui
 }
 
 function LaunchSetup() {
-  echo -e "${RED}Launching ArmUI first-time setup${NC}"
+  echo -e "${RED}Launching FADRUI first-time setup${NC}"
 
   sleep 5  # Waits 5 seconds, This gives time for service to start
   #Find the external IP address of this server by finding the route to cloudflare's DNS servers.
@@ -862,13 +862,13 @@ function LaunchSetup() {
     site_addr="${site_addr}:${Port}"
   fi
   echo "${site_addr}"
-  ArmUIServiceActive=$(systemctl is-active --quiet armui)
-  if [[ $ArmUIServiceActive -ne 0 ]]; then
-      echo -e "${RED}ERROR: ArmUI site is not running. Run \"sudo systemctl status armui\" to find out why${NC}"
+  FADRUIServiceActive=$(systemctl is-active --quiet fadrui)
+  if [[ $FADRUIServiceActive -ne 0 ]]; then
+      echo -e "${RED}ERROR: FADRUI site is not running. Run \"sudo systemctl status fadrui\" to find out why${NC}"
   else
       curl "http://${site_addr}/setup" -o /dev/null -s
       echo -e "${GREEN} Installation Complete
-      Please click this link below to access your new Automatic Ripping Machine installation!
+      Please click this link below to access your new Fully Automated Disc Ripper installation!
       http://${site_addr}${NC}\n"
   fi
 
@@ -897,7 +897,7 @@ InstallDownloadTools
 ######Test for the existence of the repository, fork and tab/branch
 RepositoryExists
 
-#######Test to see if there is a previous installation of ARM
+#######Test to see if there is a previous installation of FADR
 FoundPreviousInstallation
 
 #Test the Linux Distribution, if Debian 12, confirm presence of Contribs repos, if not, Give
@@ -906,8 +906,8 @@ FoundPreviousInstallation
 #packages)
 IsEligibleDistro
 
-######Confirm existence of / create arm user and group
-CreateArmUserAndGroup
+######Confirm existence of / create fadr user and group
+CreateFADRUserAndGroup
 
 #######Build and Install MakeMKV
 InstallMakeMKV
@@ -915,14 +915,14 @@ InstallMakeMKV
 #######Build and Install HandBrakeCLI  (The version packaged with Debian is OLD)
 InstallHandBrakeCLI
 
-#######Install Arm Dependencies
-InstallArmDependencies
+#######Install FADR Dependencies
+InstallFADRDependencies
 
-#######Install Arm
-DownloadArm
-CreatePythonVirtualEnvironmentAndInstallArmPythonDependencies
+#######Install FADR
+DownloadFADR
+CreatePythonVirtualEnvironmentAndInstallFADRPythonDependencies
 
-#######Post Arm Installation
+#######Post FADR Installation
 CreateUDEVRules
 MountDrives
 SetupFolders

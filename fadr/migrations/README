@@ -1,0 +1,10 @@
+Generic single-database configuration.
+
+Alembic documentation
+- https://alembic.sqlalchemy.org/en/latest/
+
+Adding a migration
+- from within the fully-automated-disc-ripper migration folder
+.../fully-automated-disc-ripper/fadr/migrations
+
+alembic revision -m "description of the migration"

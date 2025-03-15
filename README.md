@@ -1,4 +1,4 @@
-# Automatic Ripping Machine (ARM)
+# Fully Automated Disc Ripper (FADR)
 
 ![Python Versions](https://img.shields.io/badge/Python_Versions-_3.11_-blue?logo=python)
 

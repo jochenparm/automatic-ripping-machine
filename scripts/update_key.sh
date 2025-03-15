@@ -19,10 +19,10 @@ else
 fi
 
 # create .MakeMKV dir if it doesn't already exist
-MAKEMKV_DIR="/home/arm/.MakeMKV"
+MAKEMKV_DIR="/home/fadr/.MakeMKV"
 if [ ! -d "$MAKEMKV_DIR" ]; then
     mkdir -p "$MAKEMKV_DIR"
-    chown arm:arm "$MAKEMKV_DIR"
+    chown fadr:fadr "$MAKEMKV_DIR"
 fi
 
 # if file doesn't exist OR grep doesn't find key string in settings
@@ -49,4 +49,4 @@ else
     fi
 fi
 
-chown arm:arm "/home/arm/.MakeMKV/settings.conf"
+chown fadr:fadr "/home/fadr/.MakeMKV/settings.conf"

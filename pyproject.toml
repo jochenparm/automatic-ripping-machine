@@ -1,14 +1,14 @@
 [tool.poetry]
-name = "automatic-ripping-machine"
-version = "2.11.0"
-description = "Automatic Ripping Machine"
+name = "FADR"
+version = "1.0.0"
+description = "Fully Automated Disc Ripper (FADR)"
 authors = ["jochenp <jochenp@gmail.com>"]
 license = "MIT License"
 packages = [
-    { include = "arm", from = "." },
+    { include = "fadr", from = "." },
 ]
 readme = "README.md"
-keywords = ["arm", "python3"]
+keywords = ["fadr", "python3"]
 classifiers = [
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.11",

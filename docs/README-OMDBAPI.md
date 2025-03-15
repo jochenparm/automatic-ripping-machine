@@ -2,14 +2,14 @@
 
 ### BACKGROUND:
 
-The ARM uses a call to the OMDbAPI (Open Movie Database API) website to determine whether a video disc
+The FADR uses a call to the OMDbAPI (Open Movie Database API) website to determine whether a video disc
 is a movie or a TV series. It also uses the database to determine the correct year for a movie, since
 older movies frequently report the date of issue on DVD as opposed to the date of the actual movie. An
 example of this is "The Enforcer" which was originally released in 1976 but released on DVD in 2008.
 
-Give the two primary functions OMDBAPI is used for in ARM, it's fair to say that having it not work is
+Give the two primary functions OMDBAPI is used for in FADR, it's fair to say that having it not work is
 more than a bit of a headache in re-titling and categorizing your final product. Years may be
-wrong, and as the ARM is currently designed, your movies will be placed in the Unknown directory as
+wrong, and as the FADR is currently designed, your movies will be placed in the Unknown directory as
 opposed to the "Movies" directory. I can also see plenty of future uses for this functionality, so it
 seemed prudent to repair it and make it work again. And I like shell scripts, and I wanted to
 contribute something that might truly be useful to an already amazing project.
@@ -26,9 +26,9 @@ NOTE: Patrons receive significantly more daily API requests. Please consider con
 
 ### TO USE YOUR NEW OMDBAPI KEY:
 
-Select "Arm Settings" on the top menu, then select "Ripper Settings".  Navigate to the line for
+Select "FADR Settings" on the top menu, then select "Ripper Settings".  Navigate to the line for
 "OMDB_API_KEY:" and enter your API key here. Select "Submit" at the bottom of the page.
-That's it! The API key will be propagated throughout the ARM tool as appropriate, and any future
+That's it! The API key will be propagated throughout the FADR tool as appropriate, and any future
 links or tools using the API will be made aware.
 
 ### DEVELOPER'S NOTES:
