@@ -14,7 +14,7 @@ This is normally very quick, however it can take a while.
 ## TO USE YOUR NEW TMDBAPI KEY:
 
 Open the config file (usually /opt/arm/arm.yaml) with your favorite text editor and navigate to the
-section 'TMDB_API_KEY=""', put your new API key between the double quotes. Then find 'METADATA_PROVIDER: "omdb"'  
+section 'TMDB_API_KEY=""', put your new API key between the double quotes. Then find 'METADATA_PROVIDER: "omdb"'
 change 'omdb' to 'tmdb' and save the file.
 That's it! The API key will be propagated throughout the ARMui appropriate, and any future
 links or tools using the API will be made aware.

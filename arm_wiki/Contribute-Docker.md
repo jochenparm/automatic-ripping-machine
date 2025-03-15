@@ -3,7 +3,7 @@
 1. The first step is to make you sure have docker installed (either locally or over a network)
 
 2. Choose your preferred IDE (Notepad++ can work or even IDLE, but a full IDE with all the extras will make things much easier)
-    - PyCharm (CE is free) 
+    - PyCharm (CE is free)
     - Visual Studio
     - Atom
     - etc, etc
@@ -33,7 +33,7 @@
 
 8. Add a Run/Debug configuration
     - run-> Edit Configurations
-    - The + icon to add a new configuration 
+    - The + icon to add a new configuration
     - Select Docker->'Dockerfile'
     - Name: Can be anything
     - Server: This can vary depending on your use case (Use the server you setup from the previous step)
@@ -48,32 +48,32 @@
         - Environment Variables
         - Run Options
       - Container Name: arm-rippers
-      - Bind ports 
+      - Bind ports
         - `8080:8080`
       - Bind mounts (Each folder/-v needs to be added as with the docker run command)
         - `/home/arm:/home/arm`
-        - `/home/arm/config:/home/arm/config`  
-        - `/home/arm/Music:/home/arm/Music`  
+        - `/home/arm/config:/home/arm/config`
+        - `/home/arm/Music:/home/arm/Music`
         - `/home/arm/logs:/home/arm/logs`
         - `/home/arm/media:/home/arm/media`
 
       - Environment Variables (Change these as needed)
-        - `MAKEMKV_APP_KEY=keygoeshere` 
+        - `MAKEMKV_APP_KEY=keygoeshere`
         - `UID=1000`
-        - `GID=1000` 
+        - `GID=1000`
         - `PYTHONUNBUFFERED=0`
       - Run Options
         - `--privileged`
 9. Save the Run config
 
 10. Once you have made changes you should now be able to Run/build the image (Shift+F10).
-   It should now build the image, push the image to docker and then open a new tab in Pycharm labeled Services. 
+   It should now build the image, push the image to docker and then open a new tab in Pycharm labeled Services.
    This will output the dockers log for easier debugging.
 
 # Troubleshooting
 
 ### `[Errno 2] No such file or directory: 'curl-config'` when installing python requirements
-This issue is caused by your system not having the `curl` libraries installed.  
+This issue is caused by your system not having the `curl` libraries installed.
 To fix this on Ubuntu or Debian, run:
 ```bash
 sudo apt install libcurl4-openssl-dev libssl-dev

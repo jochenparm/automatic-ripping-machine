@@ -42,7 +42,7 @@ Title count
 C = Disc info
 
 	CINFO:id,code,value
-	CINFO:1,6209,"Blu-ray disc" 
+	CINFO:1,6209,"Blu-ray disc"
 	CINFO:2,0,"Breaking Bad: Season 1: Disc 1"
 	CINFO:28,0,"eng"
 	CINFO:29,0,"English"
@@ -131,7 +131,7 @@ When running `makemkvcon -r --cache=1 info disc:9999` each line will be a drive 
 
 `DRV:0,2,999,1,"DVD-ROM TEAC DVD-ROM DV28SV R.0C","WRATH_OF_THE_TITANS","/dev/sr0"`
 the line should then be split by comma and you will get this information.
- 
+
 1. Drive number
 2. Drive status (empty=0, Open=1, close=2?, loading=3, not-attached=256)
 3. Unknown (Always 999)

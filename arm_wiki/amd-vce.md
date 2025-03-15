@@ -19,16 +19,16 @@ You can either follow along the [commands](https://github.com/automatic-ripping-
 
  ```
  sudo apt install wget
- wget https://github.com/automatic-ripping-machine/automatic-ripping-machine/blob/v2_devel/scripts/ubuntu-quicksync.sh 
+ wget https://github.com/automatic-ripping-machine/automatic-ripping-machine/blob/v2_devel/scripts/ubuntu-quicksync.sh
  sudo chmod +x ubuntu-quicksync.sh
  sudo ./ubuntu-quicksync.sh
  ```
  Remember to `reboot` to complete installation.
- 
-This script installs some additional requirements for Intel QSV, and was for Ubuntu if you would like to only enable VCE. 
-You can use these commands 
 
-``` 
+This script installs some additional requirements for Intel QSV, and was for Ubuntu if you would like to only enable VCE.
+You can use these commands
+
+```
 ## Handbrake -  We use this one for the h.264 VCE preset
 ## The HandBrake repo doesn't include and profiles for VCE h.264
 ## If you dont need h.264 you can use
@@ -38,14 +38,14 @@ git clone https://github.com/1337-server/HandBrake.git && cd HandBrake
 sudo make --directory=build install
 ```
 
-But you will need to make you sure have all the dependencies for your own distro. 
+But you will need to make you sure have all the dependencies for your own distro.
 
 ## Other distros/Linux version
 
 You can find full details for your own version from the Official HandBrake Documentation  [**HERE**](https://handbrake.fr/docs/en/1.3.0/developer/build-linux.html)
 You will need to install all the dependencies, then run
 
-``` 
+```
 ## Handbrake -  We use this one for the h.264 VCE preset
 ## The HandBrake repo doesn't include and profiles for VCE h.264
 ## If you dont need h.264 you can use
@@ -60,7 +60,7 @@ sudo make --directory=build install
 
 `HandBrakeCLI --help | grep -A12 "Select video encoder"`
 
-If VCE is enabled should give something similar to 
+If VCE is enabled should give something similar to
 
 ```
    -e, --encoder <string>  Select video encoder:
@@ -84,7 +84,7 @@ Once you see your encoder is installed correctly you can now set `H.264 VCE 1080
 
 You will also need to add the arm user to the video & render groups so that arm can access the VCE encoder
 ```
-sudo usermod -a -G video arm 
+sudo usermod -a -G video arm
 sudo usermod -a -G render arm
 ```
 
@@ -99,5 +99,5 @@ Then you can build HandBrake and use it for ARM.
 
 The full instuctions to build HandBrake for your own distro can be found here [HandBrake Docs](https://handbrake.fr/docs/en/latest/developer/build-linux.html)
 
-## HandBrake Official Documentation 
+## HandBrake Official Documentation
 For more detailed information you can read through the official HandBrake documentation [HandBrake Building for linux](https://handbrake.fr/docs/en/1.3.0/developer/build-linux.html)

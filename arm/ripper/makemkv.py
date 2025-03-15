@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Main file for dealing with connecting to MakeMKV and handling errors
 """

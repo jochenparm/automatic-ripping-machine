@@ -25,7 +25,7 @@ The script defaults to installing the `latest` tagged image from the `automaticr
 - To specify a tag, add `-t <tag>`
 - To specify a fork, add `-f <fork>`
 
-To install default: `sudo ./docker-setup.sh`  
+To install default: `sudo ./docker-setup.sh`
 To install from a different repo, tag: `sudo ./docker-setup.sh -f automaticrippingmachine -t dev_build`
 
 The script will now:
@@ -38,34 +38,34 @@ The script will now:
 ## Post Install
 1. **ARM User ID**: In a terminal session, type `id -u arm` and make a note of the returned value
 2. **ARM Group ID**: In a terminal session, type `id -g arm` and make a note of the returned value
-3. **Start Script**: Open up `start_arm_container.sh` in the text editor of your choice. 
+3. **Start Script**: Open up `start_arm_container.sh` in the text editor of your choice.
     1. If the ARM user id is not 1000, enter that value for `ARM_UID`. If the returned value is 1000, delete that line from the script.
-    
-       Example: `-e ARM_UID="1001"` 
-     
+
+       Example: `-e ARM_UID="1001"`
+
     2. If the ARM group id is not 1000, enter that value for `ARM_GID`. If the returned value is 1000, delete that line from the script.
-    
+
        Example: `-e ARM_GID="1001"`
 
     3. Fill in the appropriate paths for the volumes being mounted. Only change the path on the left hand side, docker volumes are configured with "[local path]:[arm path]". More information about volumes is found below under the heading: [Understanding Docker Volumes for A.R.M.](#understanding-docker-volumes-for-arm)
 
        Example: `-v "/home/arm:/home/arm"`
 
-    4. Fill in your CD, DVD and Blu-Ray drives. Each `--device="/dev/sr0:/dev/sr0" \` line gives A.R.M. access to an optical drive.  To list all the drives (SSD, HD, Optical and others) found on your system, Run the command `lsscsi -g`.  For each Optical drive, the second column will have the "cd/dvd" entry, note the `/dev/sr#` (replace the pound sign # with the number) and add a device entry to your script.  By default, the script has `/dev/sr0` through `/dev/sr3` pre-entered.  Add or remove entries as necessary. You should have one entry for each "cd/dvd" that `lsscsi -g` finds.  
+    4. Fill in your CD, DVD and Blu-Ray drives. Each `--device="/dev/sr0:/dev/sr0" \` line gives A.R.M. access to an optical drive.  To list all the drives (SSD, HD, Optical and others) found on your system, Run the command `lsscsi -g`.  For each Optical drive, the second column will have the "cd/dvd" entry, note the `/dev/sr#` (replace the pound sign # with the number) and add a device entry to your script.  By default, the script has `/dev/sr0` through `/dev/sr3` pre-entered.  Add or remove entries as necessary. You should have one entry for each "cd/dvd" that `lsscsi -g` finds.
 
     5. Fill in the list of CPU core threads to give the container in `--cpuset-cpus`. It's highly recommended to leave at least one core for the hypervisor to use, so the host machine doesn't get choked out during transcoding! Also, CPUs with multiple threads per core will be numbered in pairs. In the below example, only core #4 would be passed to ARM.
-   
+
        Example: `--cpuset-cpus='5,6'`
 
    6. Set the name of the docker image, the default is below, but can be user configured.
-      
+
       Example: `--name "automatic-ripping-machine"`
-   
+
    7. Save and close
 
 
 4. **Permissions**: When starting the ARM docker container, if the ARM user ID and group ID from steps 1 and 2 are not set correctly ARM will not start. If the container does not start, check the docker logs.
-   
+
    ```bash
    docker logs automatic-ripping-machine
    ```
@@ -91,7 +91,7 @@ The script will now:
     ---------------------------------------------
     *** /etc/my_init.d/arm_user_files_setup.sh failed with status 1
     ```
-   
+
    The script outputs the configuration it is expecting, the above error expects the UID and GID to both be '1001'. With the start script having set these values. However, ARM encountered the respective folder owned by root (0:0). To resolve this, ensure that the respective directories and sub-folders are owned by the correct user.
 
    This can be fixed by changing the ownership for the associated linked file. In the above example, the /etc/arm volume is linked to the /home/arm/config directory.
@@ -125,11 +125,11 @@ In the `start_arm_container.sh` script you will find these lines:
     -v "<path_to_media_folder>:/home/arm/media" \
     -v "<path_to_config_folder>:/etc/arm/config" \
 ```
-These create volumes. What are volumes? They are easily accessible locations on your computer where you can access, delete, and change files that are accessible by the A.R.M. docker container.  They are also persistent, meaning that you can delete the docker image as many times as you want (probably to update your version of arm described in the [Updating docker image](#updating-docker-image) section above) without losing the contents of the volumes, as long as you rebuild the docker container (by re-running the `start_arm_container.sh` script) with these same volumes your previous settings, logs, database entries and completed rips will be there.  
+These create volumes. What are volumes? They are easily accessible locations on your computer where you can access, delete, and change files that are accessible by the A.R.M. docker container.  They are also persistent, meaning that you can delete the docker image as many times as you want (probably to update your version of arm described in the [Updating docker image](#updating-docker-image) section above) without losing the contents of the volumes, as long as you rebuild the docker container (by re-running the `start_arm_container.sh` script) with these same volumes your previous settings, logs, database entries and completed rips will be there.
 
 ### Explaining the different parts of the volume options
 
-The script runs a single command, `docker run`  Each line corresponds to an option passed to the `docker run` command.  
+The script runs a single command, `docker run`  Each line corresponds to an option passed to the `docker run` command.
 * `-v` means you are telling `docker run` you wish to specify a volume.
 * `"<path_to_arm_user_home_folder>:/home/arm"` is the volume description.  It takes the following form: "{Path_Outside_Of_Docker_Container}:{Path_Inside_Of_Docker_Container}" The script is pre-populated with the volumes needed by A.R.M.  If you fail to specify these volumes, the Docker will start but it will create temporary volumes that will be erased when the image is re-created.  So you are highly encouraged to specify them.
 * `\` simply tells the computer that there are more lines to the `docker run` command
@@ -159,7 +159,7 @@ Each volume specified in the default script is needed by A.R.M. The following is
 * `/etc/arm/config`
     * This is where A.R.M. will look for the configuration files `arm.yaml`, `apprise.yaml` and `abcde.conf`. If the files are present it will use them, if they are not present A.R.M. will copy fresh copies with all the defaults and use those.  You can edit these files manually here or you can edit them in the A.R.M. web interface by clicking on the "Arm Settings" button on the toolbar.
     * The default suggested location is `/home/arm/config` for the "{Path_Outside_Of_Docker_Container}" of the volume definition.
- 
+
 ### An Important note about permissions.
 
 You can choose whichever location you want for each of these volumes. They can even be mounted in locations referring to network share. However, every one of these volumes _**MUST**_ be readable and writable by the arm user and group.  For simplicity, we strongly recommend that these folders be created as the `arm` user. (Log in to your machine, as the arm user, and create the folders, using the `mkdir` command.) If you are using all the suggested defaults, run these commands as the arm user:
@@ -169,7 +169,7 @@ mkdir /home/arm/music
 mkdir /home/arm/media
 mkdir /home/arm/config
 ```
-Then add these volumes to your `start_arm_container.sh` script like so.  
+Then add these volumes to your `start_arm_container.sh` script like so.
 ```
 -v "/home/arm:/home/arm" \
 -v "/home/arm/music:/home/arm/music" \
@@ -185,5 +185,4 @@ If using network shares, be aware that the performance of your A.R.M. installati
 *    `{media_volume_local_path}` is a location on the local machine running on Fast SSD and plenty of space (20+ gigabytes for each concurrent Dual Layer DVDs or 100 gigabytes for each concurrent 4k blu-rays)
 *    `{media_volume_local_path}/completed` is a mounted network share (for example, pointing to a Plex, Emby or Jellyfin media library folder)
 
-If using a network share for the `/home/arm` volume, read this [section](https://github.com/automatic-ripping-machine/automatic-ripping-machine/wiki/Docker-Troubleshooting#my-volume-paths-point-to-a-cifs-mount---but-now-the-database-is-locked) from [Docker Troubleshooting](https://github.com/automatic-ripping-machine/automatic-ripping-machine/wiki/Docker-Troubleshooting) 
-
+If using a network share for the `/home/arm` volume, read this [section](https://github.com/automatic-ripping-machine/automatic-ripping-machine/wiki/Docker-Troubleshooting#my-volume-paths-point-to-a-cifs-mount---but-now-the-database-is-locked) from [Docker Troubleshooting](https://github.com/automatic-ripping-machine/automatic-ripping-machine/wiki/Docker-Troubleshooting)

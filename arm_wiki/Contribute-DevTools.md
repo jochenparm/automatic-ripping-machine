@@ -72,7 +72,7 @@ Running this command executes the following docker commands.
 4. Starts the ARM container, using the provided bash file/script
 
 ```
-./armdevtools.py -dr /home/arm/armdocker.bash 
+./armdevtools.py -dr /home/arm/armdocker.bash
 INFO: Going to stop ARMUI - requesting sudo
 INFO: ARM UI stopped    [Ok]
 INFO: Rebuilding docker image post ARM update

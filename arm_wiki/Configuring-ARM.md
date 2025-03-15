@@ -17,15 +17,15 @@ A lot of random problems are found in the sysmail, email alerting is a most effe
 
 I recommend you install postfix from here:http://mhawthorne.net/posts/2011-postfix-configuring-gmail-as-relay/
 
-Then configure /etc/aliases 
-	e.g.: 
-	
-	```	
+Then configure /etc/aliases
+	e.g.:
+
+	```
 	root: my_email@gmail.com
 	arm: my_email@gmail.com
 	userAccount: my_email@gmail.com
 	```
-	
+
 Run below to pick up the aliases
 
 	```
@@ -33,9 +33,9 @@ Run below to pick up the aliases
 	```
 ## Apprise notifications
 
-You can enable Apprise notifications by editing your arm.yaml file. 
+You can enable Apprise notifications by editing your arm.yaml file.
 You will need to find
- 
+
 `APPRISE: ""`
 
 Then add your apprise.yaml file to here like so.

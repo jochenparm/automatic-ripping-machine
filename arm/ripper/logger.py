@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Main code for setting up the logging for all of A.R.M
 Also triggers CD identification

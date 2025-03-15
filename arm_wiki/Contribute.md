@@ -57,31 +57,31 @@ resolve them against the same branch used to raise the PR and push to GitHub.
 GitHub will do the rest, re-running all tests.
 
 ## Hardware/OS Documentation
-The installation guide is for Ubuntu20.04/Debian Buster/OMVault(debian) and the devs run it in VMware, however, many are running ARM in different environments. 
-If you have successfully set ARM up in a different environment and would like to assist others, please submit a howto to the [wiki](https://github.com/automatic-ripping-machine/automatic-ripping-machine/wiki).   
+The installation guide is for Ubuntu20.04/Debian Buster/OMVault(debian) and the devs run it in VMware, however, many are running ARM in different environments.
+If you have successfully set ARM up in a different environment and would like to assist others, please submit a howto to the [wiki](https://github.com/automatic-ripping-machine/automatic-ripping-machine/wiki).
 
 ## Testing
- 
+
 ARM is written to meed the Python style guide PEP8 (https://pep8.org/. On submitting a new PR to ARM, the new and modified code will be checked against PEP8 for compliance.
 Prior to loading up a new PR, it is recommended that the new or modified file within the PR be run through PEP8 (now pycodestyle).
 
 The ARM Devs have developed some usefull tools for testing and scripting some of the development process.
 Check out the [ARM Development Tools (devtools)](https://github.com/automatic-ripping-machine/automatic-ripping-machine/wiki/Contribute-DevTools)
- 
+
 ### Setting up pycodestyle
- 
+
  You can install, upgrade, and uninstall pycodestyle.py with these commands:
- 
+
  ```
  $ pip install pycodestyle
  $ pip install --upgrade pycodestyle
  $ pip uninstall pycodestyle
  ```
- 
+
  There’s also a package for Debian/Ubuntu, but it’s not always the latest version.
- 
+
  Example usage and output
- 
+
  ```
  $ pycodestyle --first optparse.py
  optparse.py:69:11: E401 multiple imports on one line
@@ -93,22 +93,22 @@ Check out the [ARM Development Tools (devtools)](https://github.com/automatic-ri
  optparse.py:472:29: E221 multiple spaces before operator
  optparse.py:544:21: W601 .has_key() is deprecated, use 'in'
  ```
- 
+
  You can also make pycodestyle.py show the source code for each error, and even the relevant text from PEP 8:
- 
+
  ```
  $ pycodestyle --show-source --show-pep8 testsuite/E40.py
  testsuite/E40.py:2:10: E401 multiple imports on one line
  import os, sys
           ^
      Imports should usually be on separate lines.
- 
+
      Okay: import os\nimport sys
      E401: import sys, os
  ```
- 
+
  Or you can display how often each error was found:
- 
+
  ```
  $ pycodestyle --statistics -qq Python-2.5/Lib
  232     E201 whitespace after '['
@@ -124,9 +124,9 @@ Check out the [ARM Development Tools (devtools)](https://github.com/automatic-ri
  612     W601 .has_key() is deprecated, use 'in'
  1188    W602 deprecated form of raising exception
  ```
- 
+
  Source: https://pypi.org/project/pycodestyle/
- 
+
 ### Testing out ARM
- 
+
  If you are interested in helping out with testing, quality, etc. please let us know.

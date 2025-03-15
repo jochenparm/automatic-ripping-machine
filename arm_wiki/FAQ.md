@@ -3,18 +3,18 @@
 ## My arm wont start when i insert a disc ?
 
 When a disc is inserted, udev rules should launch a script (scripts/arm_wrapper.sh) that will launch A.R.M.  Here are some basic troubleshooting steps:
-- Look for empty.log.  
+- Look for empty.log.
   - Everytime you eject the cdrom, an entry should be entered in empty.log like:
   ```
   [2018-08-05 11:39:45] INFO A.R.M: main.<module> Drive appears to be empty or is not ready.  Exiting A.R.M.
   ```
   - Empty.log should be in your logs directory as defined in your arm.yaml file.  If there is no empty.log file, or entries are not being entered when you eject the cdrom drive, then udev is not launching A.R.M correctly.  Check the instructions and make sure the symlink to 51-automedia.rules is set up right.  I've you've changed the link or the file contents you need to reload your udev rules with:
   ```
-  sudo udevadm control --reload-rules 
+  sudo udevadm control --reload-rules
   ```
 - Make sure the user arm has write permission to the location you have set in your arm.yaml
     You can test these permissions by inserting a disc and running (remember to replace sr0 with the name of your own device)
-	
+
     `sudo -u arm /usr/bin/python3 /opt/arm/arm/ripper/main.py -d sr0`
 
 - Check that  the arm_wrapper.sh is executable
@@ -23,7 +23,7 @@ When a disc is inserted, udev rules should launch a script (scripts/arm_wrapper.
   `sr0: Process '/opt/arm/scripts/arm_wrapper.sh sr0' failed with exit code 1`
 
   If you see this in your logs it can mean arm_wrapper.sh isn't executable, you can fix this by running
-   
+
   `sudo chmod +x /opt/arm/scripts/arm_wrapper.sh`
 
 - Lastly is to check the output of `tail -f /var/log/syslog`
@@ -61,7 +61,7 @@ The reason these aren't enabled by default is that Rip method being set to mkv c
   ```
  If none of these are showing, you need to install Intel Media SDK [MediaSDK](https://github.com/Intel-Media-SDK/MediaSDK) and its requirements & install the correct driver for your graphics. **You also may need to recompile HandBrake from source depending on your distro**
 
-- If they are showing are you using the correct profile ? For QSV there are 2 built in profiles you can use 
+- If they are showing are you using the correct profile ? For QSV there are 2 built in profiles you can use
 
   - `H.265 QSV 2160p 4K`
   - `H.265 QSV 1080p`
@@ -79,9 +79,9 @@ The reason these aren't enabled by default is that Rip method being set to mkv c
   vce_h264
   vce_h265
   ```
- If none of these are showing, you need to install the amdgpu-pro drivers & amf-amdgpu-pro package. You will also need to install the Vulkan SDK. 
+ If none of these are showing, you need to install the amdgpu-pro drivers & amf-amdgpu-pro package. You will also need to install the Vulkan SDK.
 
-- If they are showing are you using the correct profile ? For VCE there is only 1 built in profiles you can use 
+- If they are showing are you using the correct profile ? For VCE there is only 1 built in profiles you can use
   - `H.264 VCE 1080p`
 
 - Make sure you only install drivers for your own graphics card. Installing incorrect drivers can cause issues with AMD VCE (personally mesa-vulkan-drivers caused a headache, your own may vary)
@@ -93,13 +93,13 @@ The reason these aren't enabled by default is that Rip method being set to mkv c
  - I have no idea, and I can't test.
 
 ## Other problems
-- Check A.R.M log files 
-  - The default location is /home/arm/logs/ (unless this is changed in your arm.yaml file) and is named after the dvd. These are very verbose.  You can filter them a little by piping the log through grep.  Something like 
+- Check A.R.M log files
+  - The default location is /home/arm/logs/ (unless this is changed in your arm.yaml file) and is named after the dvd. These are very verbose.  You can filter them a little by piping the log through grep.  Something like
   ```
   cat <logname> | grep ARM:
-  ```  
+  ```
     This will filter out the MakeMKV and HandBrake entries and only output the A.R.M log entries.
-  - You can change the verbosity in the arm.yaml file.  DEBUG will give you more information about what A.R.M is trying to do.  Note: please run a rip in DEBUG mode if you want to post to an issue for assistance.  
+  - You can change the verbosity in the arm.yaml file.  DEBUG will give you more information about what A.R.M is trying to do.  Note: please run a rip in DEBUG mode if you want to post to an issue for assistance.
   - Ideally, if you are going to post a log for help, please delete the log file, and re-run the disc in DEBUG mode.  This ensures we get the most information possible and don't have to parse the file for multiple rips.
 
 If you need any help feel free to open an issue.  Please see the above note about posting a log.

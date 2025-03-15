@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 """
 Automatic-Ripping-Machine Development Tools
     ARM UI management tools

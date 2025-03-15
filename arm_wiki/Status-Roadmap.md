@@ -43,7 +43,7 @@ The primary goals and objectives of the ARM development roadmap are:
 - **1:** Migrate the current database from SQLite to MySQL
 - **2:** Support user migration of existing databases to the new container
 
-### Implementation of Sessions 
+### Implementation of Sessions
 Implementation of sessions to be conducted once both the rewrite and docker-compose completed
 
 Details from Community Discussion - [ARM Sessions for Drives](https://github.com/automatic-ripping-machine/automatic-ripping-machine/discussions/815)

@@ -5,7 +5,7 @@
 
 For me personally i had to add the `--privileged` flag to my container for it to fully work, However i'm very new to docker there may be a better work around to get it to work. But this is how i got it working.
 
-You can check if your udev rules are working on the host machine via linux logs 
+You can check if your udev rules are working on the host machine via linux logs
 
 `tail -f /var/log/syslog | grep ARM`
 
@@ -21,7 +21,7 @@ MakeMKV requires both drive identifiers to be passed into the container for exam
 
 `cd/dvd  TEAC     DVD-ROM DV28SV   R.0C  /dev/sr0   /dev/sg5 `
 
-You will need to add 
+You will need to add
 ```
 --device /dev/sr0
 --device /dev/sg5
@@ -32,12 +32,12 @@ Failing to do so may mean that the rest of ARM can find the drive but MakeMKV fa
 
 ## Docker is adding jobs but no files are created
 Check the docker to make sure both the UID and GID match to a user outside the container, and the user has write permissions to the media directory.
-You may need to chmod your media/music directories outside the container. 
+You may need to chmod your media/music directories outside the container.
 
 ## Changing where the docker puts files
-**DO NOT try to change these paths in the arm.yaml** 
+**DO NOT try to change these paths in the arm.yaml**
 
-Instead change the containers volume paths. 
+Instead change the containers volume paths.
 These can be changed to suit your needs
 ```
     -v "/my-music-path:/home/arm/Music" \
@@ -48,7 +48,7 @@ These can be changed to suit your needs
 
 ## My volume paths point to a CIFS mount - but now the database is locked
 This is caused by a byte-range lock on the mount by default.
-To fix this, the CIFS mount of your host needs the `nobrl` flag. 
+To fix this, the CIFS mount of your host needs the `nobrl` flag.
 
 ## NVENC doesn't work
 

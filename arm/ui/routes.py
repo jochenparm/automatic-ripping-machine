@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Main routes for the A.R.M ui
 Covers

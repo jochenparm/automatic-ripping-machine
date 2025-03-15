@@ -157,7 +157,7 @@ button.bg-danger:focus {
 }
 
 
-[data-theme="dark"] a.bg-light:hover, 
+[data-theme="dark"] a.bg-light:hover,
 [data-theme="dark"] a.bg-light:focus,
 [data-theme="dark"] button.bg-light:hover,
 [data-theme="dark"] button.bg-light:focus {
@@ -168,7 +168,7 @@ button.bg-danger:focus {
   background-color: #272b30 !important;
 }
 
-[data-theme="dark"] a.bg-dark:hover, 
+[data-theme="dark"] a.bg-dark:hover,
 [data-theme="dark"] a.bg-dark:focus,
 [data-theme="dark"] button.bg-dark:hover,
 [data-theme="dark"] button.bg-dark:focus {
@@ -236,7 +236,7 @@ button.bg-danger:focus {
 [data-theme="dark"] .table-bordered td {
     border: 1px solid #dee2e6 !important;
   }
-  
+
 [data-theme="dark"] .table-primary,
 [data-theme="dark"] .table-primary > th,
 [data-theme="dark"] .table-primary > td {
@@ -382,7 +382,7 @@ button.bg-danger:focus {
 
 [data-theme="dark"] .btn-primary:not([disabled]):not(.disabled):hover,
 [data-theme="dark"] .btn-primary:not([disabled]):not(.disabled):focus,
-[data-theme="dark"] .btn-primary:not([disabled]):not(.disabled):active:hover, 
+[data-theme="dark"] .btn-primary:not([disabled]):not(.disabled):active:hover,
 [data-theme="dark"] .btn-primary:not([disabled]):not(.disabled).active:hover {
   background-image: linear-gradient(#101112, #17191b 40%, #1b1e20);
   background-repeat: no-repeat;

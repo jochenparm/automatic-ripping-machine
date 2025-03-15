@@ -25,7 +25,7 @@
       - [.abcde.conf](Config-abcde.conf)
       - [Skins for ARM ui](Config-ui-skins)
       - [MakeMKV](MakeMKV-Info)
-     
+
    - **Alternate Installations**
      - [Ubuntu](Alternate-Install-Ubuntu)
      - [Ubuntu 20.04 (install script)](Ubuntu-20.04-Automatic-Installation)

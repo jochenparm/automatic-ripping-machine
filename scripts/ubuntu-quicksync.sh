@@ -8,9 +8,9 @@ sudo apt install libvulkan1 vulkan-utils
 # sudo apt install mesa-vulkan-drivers
 sudo apt install autoconf libtool xorg xorg-dev openbox libx11-dev libgl1-mesa-glx libgl1-mesa-dev
 
-sudo apt install automake autopoint build-essential cmake git libass-dev libbz2-dev libfontconfig1-dev libfreetype6-dev libfribidi-dev libharfbuzz-dev libjansson-dev liblzma-dev libmp3lame-dev libnuma-dev libogg-dev libopus-dev libsamplerate-dev libspeex-dev libtheora-dev libtool libtool-bin libturbojpeg0-dev libvorbis-dev libx264-dev libxml2-dev libvpx-dev m4 make meson nasm ninja-build patch pkg-config python tar zlib1g-dev 
+sudo apt install automake autopoint build-essential cmake git libass-dev libbz2-dev libfontconfig1-dev libfreetype6-dev libfribidi-dev libharfbuzz-dev libjansson-dev liblzma-dev libmp3lame-dev libnuma-dev libogg-dev libopus-dev libsamplerate-dev libspeex-dev libtheora-dev libtool libtool-bin libturbojpeg0-dev libvorbis-dev libx264-dev libxml2-dev libvpx-dev m4 make meson nasm ninja-build patch pkg-config python tar zlib1g-dev
 sudo apt install intel-media-va-driver
- 
+
 # INtell quick sync for handbrake
 sudo apt-get install -qqy libva-dev libdrm-dev
 
@@ -50,7 +50,7 @@ sudo make --directory=build install
 sudo apt update
 sudo apt upgrade
 
-sudo usermod -a -G video arm 
+sudo usermod -a -G video arm
 sudo usermod -a -G render arm
 
 echo "You should reboot!"

@@ -12,7 +12,7 @@ The best way to setup ARM for a new user is to follow along from here [Debian](h
  sudo chmod +x debian-setup.sh
  sudo ./debian-setup.sh
  ```
- 
+
  **For the silent install use**
   ```
  sudo apt -qqy install wget

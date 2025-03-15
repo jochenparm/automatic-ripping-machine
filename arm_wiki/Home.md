@@ -7,7 +7,7 @@ See: https://b3n.org/automatic-ripping-machine for a more detailed breakdown of 
 
 ## Supported Operating Systems
 
-ARM is available as both a [Docker image](https://github.com/automatic-ripping-machine/automatic-ripping-machine/wiki/docker) as well as in a natively installed version. 
+ARM is available as both a [Docker image](https://github.com/automatic-ripping-machine/automatic-ripping-machine/wiki/docker) as well as in a natively installed version.
 
 ### Docker image
 

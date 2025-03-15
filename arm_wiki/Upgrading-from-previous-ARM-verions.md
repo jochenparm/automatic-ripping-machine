@@ -1,6 +1,6 @@
 ## Upgrading from v2_master to v2.2_dev
 
-If you wish to upgrade from v2_master to v2.2_dev instead of a clean install, these directions should get you there.  
+If you wish to upgrade from v2_master to v2.2_dev instead of a clean install, these directions should get you there.
 
 ```bash
 cd /opt/arm
@@ -27,10 +27,9 @@ on Ubuntu 20.04.
 
 Please log any issues you find.  Don't forget to run in DEBUG mode if you need to submit an issue (and log files).  Also, please note that you are running 2.2_dev in your issue.
 
-You will also need to visit your http://WEBSERVER_IP:WEBSERVER_PORT/setup  
-							&#x26A0; &#x26A0; **!!!WARNING!!!** &#x26A0; &#x26A0;  					
+You will also need to visit your http://WEBSERVER_IP:WEBSERVER_PORT/setup
+							&#x26A0; &#x26A0; **!!!WARNING!!!** &#x26A0; &#x26A0;
 
 Visiting this page will delete your current database and create a new db file. You WILL lose jobs/tracks/etc from your database
-This will setup the new database, and ask you to make an admin account. Because of the changes to the armui its not possible to view/change/delete entries without logging in. 
+This will setup the new database, and ask you to make an admin account. Because of the changes to the armui its not possible to view/change/delete entries without logging in.
 Due to these large number of changes to the database its not currently possible to upgrade without creating a new database
-

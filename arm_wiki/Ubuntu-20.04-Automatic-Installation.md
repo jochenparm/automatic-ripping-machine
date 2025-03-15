@@ -20,7 +20,7 @@ chmod +x ubuntu-20.04-install.sh
 ## Install ARM
 The script defaults to installing a live version of ARM, but includes a `-d` flag that can be specified to install ARM in a development environment.
 
-To install ARM LIVE: `sudo ./ubuntu-20.04-install.sh`  
+To install ARM LIVE: `sudo ./ubuntu-20.04-install.sh`
 To install ARM DEV: `sudo ./ubuntu-20.04-install.sh -d`
 
 After the script finishes, Firefox should open to `http:<machine_ip>:8080/setup` and prompt the user to create an admin account. If this doesn't happen, check the installer console log for error messages.
@@ -44,9 +44,9 @@ No live-specific post installation steps are needed
 5. In the upper right hand corner, click the green button to run or the green bug to run inside PyCharm's debugger
 
 ### Notes
-If you terminate a debugging run early, run `mount /dev/sr0` to make sure the disk is mounted before the next run. ARM will break if the disk is not mounted. 
+If you terminate a debugging run early, run `mount /dev/sr0` to make sure the disk is mounted before the next run. ARM will break if the disk is not mounted.
 
 The default username and password is
 
-- Username: admin 
+- Username: admin
 - Password: password

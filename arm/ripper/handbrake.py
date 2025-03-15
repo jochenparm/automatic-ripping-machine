@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Handbrake processing of dvd/blu-ray"""
 
 import os

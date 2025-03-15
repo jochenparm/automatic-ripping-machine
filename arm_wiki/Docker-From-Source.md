@@ -1,17 +1,17 @@
-## Building an ARM Docker Image  
+## Building an ARM Docker Image
 
 ### :bangbang:This is not compatible with the snap version of docker!:bangbang:
 
-This requires you to build an image from source. 
+This requires you to build an image from source.
 
 ### Pre-requisites
-1. Instructions tested based on a new Ubuntu 20.04 LTS minimal install 
+1. Instructions tested based on a new Ubuntu 20.04 LTS minimal install
 2. Create the arm user and set a password
-3. Install Docker, an editor such as Atom or VS Codium, lsscsi, and any other needed utilities as desired  
-4. Setup all of your optical drives so that the arm (non-root) user can mount them. Run `lsscsi -g` to verify their mountpoints if you're unsure.  
-  -run `sudo mkdir -p /mnt/dev/sr0` and repeat for each device, e.g., sr1, sr2, etc  
-  -edit fstab and add an entry for each drive, incrementing the sr* number for each  
-  `sudo nano /etc/fstab`     
+3. Install Docker, an editor such as Atom or VS Codium, lsscsi, and any other needed utilities as desired
+4. Setup all of your optical drives so that the arm (non-root) user can mount them. Run `lsscsi -g` to verify their mountpoints if you're unsure.
+  -run `sudo mkdir -p /mnt/dev/sr0` and repeat for each device, e.g., sr1, sr2, etc
+  -edit fstab and add an entry for each drive, incrementing the sr* number for each
+  `sudo nano /etc/fstab`
   `/dev/sr0  /mnt/dev/sr0  udf,iso9660  users,noauto,exec,utf8  0  0`
 
 ### Add the arm user and group (Recommended)
@@ -28,7 +28,7 @@ usermod -aG cdrom,video arm
 ```
 
 ### Build the image:
-`git clone https://github.com/automatic-ripping-machine/automatic-ripping-machine.git arm`  
+`git clone https://github.com/automatic-ripping-machine/automatic-ripping-machine.git arm`
 
 `cd arm`
 
@@ -69,13 +69,13 @@ A.R.M should now be fully setup, and ripping should start when a disc is inserte
 The ARM_UID(1000) and ARM_GID(1000) should exist outside the container. This helps against any permission issues.
 
 It is recommended when passing in a device to pass in both labels you get from `lsscsi -g`
-For example, if `lsscsi -g` outputs 
+For example, if `lsscsi -g` outputs
 
 ```
-[2:0:0:0]    cd/dvd  NECVMWar VMware SATA CD00 1.00  /dev/sr0   /dev/sg1 
-[32:0:0:0]   disk    VMware,  VMware Virtual S 1.0   /dev/sda   /dev/sg0 
+[2:0:0:0]    cd/dvd  NECVMWar VMware SATA CD00 1.00  /dev/sr0   /dev/sg1
+[32:0:0:0]   disk    VMware,  VMware Virtual S 1.0   /dev/sda   /dev/sg0
 ```
-You should pass in 
+You should pass in
 ```
     --device="/dev/sr0:/dev/sr0" \
     --device="/dev/sg1:/dev/sg1" \

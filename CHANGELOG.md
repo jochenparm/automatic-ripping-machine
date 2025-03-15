@@ -4,17 +4,17 @@
 ## Current pre-release v2.5.0
   - Only one large item for this version.
 
-    Now added the possibility for users to use [TMDB](https://developers.themoviedb.org/3/getting-started/introduction) as their metadata provider, this only works for movies at the moment. 
+    Now added the possibility for users to use [TMDB](https://developers.themoviedb.org/3/getting-started/introduction) as their metadata provider, this only works for movies at the moment.
     In time this will have the same functionality as OMDB (movies and tv shows)
     The idea driving this is that users should be able to choose their metadata provider.
     I also think this is safer route in the long term, its better to have multiple options than only focus on one provider.
-    
+
     - Added method to let users send/submit their correctly identified movies to a new crc64 API (an api key required)
     - Added check for crc64 from remote database
 
 ## v2.4.6
- - Updated jquery tablesorter, old version was vulnerable to XSS 
- - Removed all unused versions of CSS 
+ - Updated jquery tablesorter, old version was vulnerable to XSS
+ - Removed all unused versions of CSS
  - Smalls validation checks when searching the database page. (searching now requires min 3 chars)
  - Small changes to index.html (home for arm ui) to warn before abandoning jobs
  - Jquery ui now fully removed. Now uses only bootstrap for theming
@@ -27,7 +27,7 @@
  - Abandon job option added to main ARM ui page (for now this only sets job to failed no processes are cancelled)
  - Typo fixes (ARM ui images has/had some typos these have been updated and corrected)
  - ARM ui now shows CPU temps
- - ARM ui now uses percentage bars to more clearly display storage and RAM usage 
+ - ARM ui now uses percentage bars to more clearly display storage and RAM usage
  - ARM ui database page is now fully functional with updated ui that looks clearer and with more details
  - ARM ui database is now searchable
  - ARM ui settings page now fully works and saves your settings to the arm.yaml
@@ -52,19 +52,19 @@
 
 ## v2.3.3
 
- - A smaller more manageable update this time 
+ - A smaller more manageable update this time
  - Early changes for cleaner looking log output
   - Security (HandBrake.py outputs the new prettytable format)
-  - Bugfix (Transcode limit is now respected) 
+  - Bugfix (Transcode limit is now respected)
   - Bugfix (Bluray disc with no titles will now be handled correctly and will not throw an exception )
   - Bugfix (abcde.config now correctly uses musicbrainz)
 
 ## v2.3.2
  - Added prettytables for logging
- - Remove api/keys from the Config class string printout 
+ - Remove api/keys from the Config class string printout
   - Security (HandBrake.py was still outputting all api key and secrets to log file. This has now been fixed)
-  - Bugfix (Transcode limit is now respected) 
-  - Bugfix (Bluray disc with no titles will now be handled correctly and will not throw an exception ) 
+  - Bugfix (Transcode limit is now respected)
+  - Bugfix (Bluray disc with no titles will now be handled correctly and will not throw an exception )
 
 ## v2.2.0
  - Added Apprise notifications
@@ -74,9 +74,9 @@
     - Allow Deleting entries from the db (also warning for both the page and every delete)
     - Added music CD covers (provied by musicbrainz & coverartarchive.org)
     - Added CPU/RAM info on index page
-    - Added some clearer display for the listlogs page 
-    - Bugfix (Mainfeature now works when updating in the ui) 
-    - Bugfix (Job is no longer added twice when updated in ui) 
+    - Added some clearer display for the listlogs page
+    - Bugfix (Mainfeature now works when updating in the ui)
+    - Bugfix (Job is no longer added twice when updated in ui)
     - ALPHA: Added ARM settings page (This only shows settings for the moment, no editing)
   - Added Intel QuickSync Video support
   - Added AMD VCE support
@@ -85,11 +85,11 @@
   - Added Debian Installer Script
   - Added Ubuntu Installer Script
   - Added Auto Identfy of music CD's
-  - Made changes to the setup logging to allow music CD's to use the their artist name and album name as the log file 
+  - Made changes to the setup logging to allow music CD's to use the their artist name and album name as the log file
   - Added abcde config file overide (This lets you give a custom config file to abcde from anywhere)
   - Added log cleaner function to strip out secret keys (This isnt complete yet)
-  - Bugfix (datadiscs with no label no longer fail) 
-  - Bugfix (NONE_(timestamp).log will no longer be generated ) 
+  - Bugfix (datadiscs with no label no longer fail)
+  - Bugfix (NONE_(timestamp).log will no longer be generated )
 
 ## v2.1.0
  - Added new package (armui) for web user interface

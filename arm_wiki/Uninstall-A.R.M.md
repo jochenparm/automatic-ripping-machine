@@ -1,4 +1,4 @@
-# Ubuntu uninstall 
+# Ubuntu uninstall
 Save this file as **uninstall_arm.sh**
 
 ```
@@ -17,7 +17,7 @@ sudo apt purge libcurl4-openssl-dev libssl-dev -y && \
 sudo apt purge libdvd-pkg -y && \
 sudo apt purge default-jre-headless -y
 cd /opt/arm
-sudo pip3 uninstall -y -r requirements.txt 
+sudo pip3 uninstall -y -r requirements.txt
 cd ~
 sudo rm -R /opt/arm
 sudo rm -R /home/arm

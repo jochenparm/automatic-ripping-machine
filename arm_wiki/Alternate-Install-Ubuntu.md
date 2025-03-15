@@ -6,7 +6,7 @@
 > we recommend installing ARM via the supported [Docker Container](https://github.com/automatic-ripping-machine/automatic-ripping-machine/wiki/docker).
 > This installation method was developed for those that wish to use ARM without Docker.
 >
-> **Use at your own risk** 
+> **Use at your own risk**
 
 ## Pre-Install (only if necessary)
 
@@ -23,17 +23,17 @@ sudo regionset /dev/sr0
 
 Sets up graphics drivers, does Ubuntu update & Upgrade, gets Ubuntu to auto set up driver, and finally installs and setups up avahi-daemon
 ```bash
-sudo apt update -y && sudo apt upgrade -y 
+sudo apt update -y && sudo apt upgrade -y
 ***optional (was not required for me): sudo add-apt-repository ppa:graphics-drivers/ppa
 sudo apt install avahi-daemon -y && sudo systemctl restart avahi-daemon
-sudo apt install ubuntu-drivers-common -y && sudo ubuntu-drivers install 
+sudo apt install ubuntu-drivers-common -y && sudo ubuntu-drivers install
 sudo reboot
 # Installation of drivers seems to install a full gnome desktop, and it seems to set up hibernation modes.
 # It is optional to run the below line (Hibernation may be something you want.)
 	sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
 sudo groupadd arm
 sudo useradd -m arm -g arm -G cdrom
-sudo passwd arm 
+sudo passwd arm
   <enter new password>
 ```
 
@@ -67,7 +67,7 @@ sudo chmod 775 arm
 sudo git clone --recurse-submodules https://github.com/automatic-ripping-machine/automatic-ripping-machine.git arm
 sudo chown -R arm:arm arm
 cd arm
-sudo pip3 install -r requirements.txt 
+sudo pip3 install -r requirements.txt
 sudo cp /opt/arm/setup/51-automedia.rules /etc/udev/rules.d/
 sudo cp docs/arm.yaml.sample arm.yaml
 sudo chown arm:arm arm.yaml
@@ -102,12 +102,12 @@ su - arm -c "ln -sf /etc/.abdce.conf /etc/arm/config/abcde.conf"
 
 ### Installing the ARMui service
 
-    
+
 Create folders required to run the ARM service
 ```sudo -u arm mkdir -p /home/arm/logs```
 
 Create a new service file
-```sudo nano /etc/systemd/system/armui.service ``` 
+```sudo nano /etc/systemd/system/armui.service ```
 
 Then put this in the file
 ```
@@ -143,13 +143,13 @@ Setup is now almost complete! Reboot...
 ## Post install
 You may need to fix permissions in the arm home directory
 `sudo chmod -R 775 /home/arm`
-				
+
 The default username and password is
 
-- Username: admin 
+- Username: admin
 - Password: password
 
-Alternatively, you can insert a disc or trigger it manually by running 
+Alternatively, you can insert a disc or trigger it manually by running
 ```
 /usr/bin/python3 /opt/arm/arm/ripper/main.py -d sr0 | at now
 ```

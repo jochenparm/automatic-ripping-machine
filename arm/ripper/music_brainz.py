@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 """Module to connect to A.R.M to MusicBrainz API"""
 
 import logging

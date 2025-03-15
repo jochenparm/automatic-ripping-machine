@@ -103,5 +103,3 @@ A drive might give up and just quit, removing it from the ARM web page makes lif
 > [!NOTE]
 > If you remove a drive accidentally, don't worry.
 > Simply running the 'Scan for Drives' will return all drives back if you accidentally remove the wrong drive.
-
-

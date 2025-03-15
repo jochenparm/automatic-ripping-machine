@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Identification of dvd/bluray"""
 
 import os

@@ -1,6 +1,6 @@
 **Warning! Some of these may be old and outdated**
 
-ARM under LXC / Proxmox: 
+ARM under LXC / Proxmox:
 
  - https://www.reddit.com/r/homelab/comments/7bgtu9/a_simple_solution_for_getting_automated_ripping/
 

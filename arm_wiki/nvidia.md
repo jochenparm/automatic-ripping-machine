@@ -1,7 +1,7 @@
 # Checking for NVENC support
 Nvidia NVENC support comes with HandBrake in some distros, to check first make sure you have at least
 - GeForce GTX Pascal (1050+)
-- RTX Turing (1650+, 2060+) 
+- RTX Turing (1650+, 2060+)
 - or later GPU.
 - drivers are updated to at least 418.81 or later.
 
@@ -28,7 +28,7 @@ If NVENC is enabled should give something similar to
                                VP9
 HandBrake has exited.
 ```
-You can also check with 
+You can also check with
 `HandBrakeCLI --version` and it should output
 
 ```
@@ -43,7 +43,7 @@ HandBrake 20230130172537-a5238f484-master
 ## Cant see those options ?
 
 If you don't see the extra options for nvenc then you will need to build HandBrakeCLI from source.
-instructions can be found here: 
+instructions can be found here:
 
 First add all the dependencies from here:
 https://handbrake.fr/docs/en/latest/developer/install-dependencies-ubuntu.html
@@ -61,14 +61,14 @@ If you have a desktop environment install drop the --gpgpu
 `sudo reboot`
 
 ## Installing the NVIDIA Container Toolkit:
-Do this before point 5 in post installation guide for docker "Run the container with sudo ./start_arm_container.sh" 
+Do this before point 5 in post installation guide for docker "Run the container with sudo ./start_arm_container.sh"
 
 1. Adding the repository:
 `curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
   && curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
     sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
-    sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list` 
-    
+    sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list`
+
 2. Update repository
 `sudo apt-get update`
 4. Install the NVIDIA Container Toolkit packages:
@@ -91,7 +91,7 @@ You can use one of the 2 built in profiles in your arm.yaml config.
 
 You will also need to add the arm user to the video & render groups so that arm can access the NVENC encoder
 ```
-sudo usermod -a -G video arm 
+sudo usermod -a -G video arm
 sudo usermod -a -G render arm
 ```
 
@@ -101,6 +101,5 @@ sudo usermod -a -G render arm
 Be sure that both variables for `NVIDIA_DRIVER_CAPABILITIES=all`
 and `--gpus all` are set as NVENC won't work without them
 
-## HandBrake Official Documentation 
+## HandBrake Official Documentation
 For more detailed information you can read through the official HandBrake documentation [HandBrake Building for linux](https://handbrake.fr/docs/en/1.3.0/developer/build-linux.html)
-
