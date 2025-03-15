@@ -27,6 +27,10 @@ repos:
   - repo: https://github.com/asottile/pyupgrade
     rev: v3.19.1
     hooks:
-    -   id: pyupgrade
+      - id: pyupgrade
         args:
           - --py311-plus
+  - repo: https://github.com/pycqa/flake8
+    rev: 7.1.2
+    hooks:
+      - id: flake8
