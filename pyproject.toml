@@ -2,13 +2,12 @@
 name = "automatic-ripping-machine"
 version = "2.11.0"
 description = "Automatic Ripping Machine"
-authors = ["Abeautifulsnow"]
+authors = ["jochenp <jochenp@gmail.com>"]
 license = "MIT License"
 packages = [
     { include = "arm", from = "." },
 ]
 readme = "README.md"
-repository = "https://github.com/automatic-ripping-machine/automatic-ripping-machine"
 keywords = ["arm", "python3"]
 classifiers = [
     "Programming Language :: Python :: 3",
