@@ -1,14 +1,16 @@
 """ Main file for running DVDs/Blu-rays/CDs/data ?
 It would help clear up main and make things easier to find
 """
-import sys
-import os
+from __future__ import annotations
+
 import logging
+import os
+import sys
 
 sys.path.append("/opt/arm")
 
-from arm.ripper import utils, makemkv, handbrake  # noqa E402
-from arm.ui import app, db, constants  # noqa E402
+from arm.ripper import handbrake, makemkv, utils  # noqa E402
+from arm.ui import app, constants, db  # noqa E402
 
 
 def rip_visual_media(have_dupes, job, logfile, protection):

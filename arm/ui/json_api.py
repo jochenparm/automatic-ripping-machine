@@ -2,12 +2,15 @@
 Basic json api for access to A.R.M UI
 Also used to connect to both omdb and tmdb
 """
-import os
-import subprocess
-import re
-import html
-from pathlib import Path
+from __future__ import annotations
+
 import datetime
+import html
+import os
+import re
+import subprocess
+from pathlib import Path
+
 import psutil
 from flask import request
 
@@ -19,8 +22,9 @@ from arm.models.track import Track
 from arm.models.ui_settings import UISettings
 from arm.ui import app, db
 from arm.ui.forms import ChangeParamsForm
-from arm.ui.utils import job_id_validator, database_updater, authenticated_state
-from arm.ui.settings import DriveUtils as drive_utils # noqa E402
+from arm.ui.settings import DriveUtils as drive_utils  # noqa E402
+from arm.ui.utils import (authenticated_state, database_updater,
+                          job_id_validator)
 
 
 def get_notifications():

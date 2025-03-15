@@ -10,14 +10,17 @@ Ripper Utils
 - update_drive_job
 """
 
-import pyudev
-import re
+from __future__ import annotations
+
 import logging
+import re
+
+import pyudev
 from sqlalchemy import desc
 
-from arm.ui import app, db
 from arm.models.job import Job
 from arm.models.system_drives import SystemDrives
+from arm.ui import app, db
 
 
 def drives_search():

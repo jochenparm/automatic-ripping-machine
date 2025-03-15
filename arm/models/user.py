@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from flask_login import UserMixin
 
 from arm.ui import db

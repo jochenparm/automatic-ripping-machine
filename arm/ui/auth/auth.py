@@ -8,15 +8,18 @@ Covers
 - update_password [GET, POST]
 """
 
-import bcrypt
-from flask import redirect, render_template, request, Blueprint, flash, app, session
-from flask_login import LoginManager, login_required, \
-    current_user, login_user, logout_user  # noqa: F401
+from __future__ import annotations
 
-from arm.ui import app, db, constants   # noqa: F811
-from arm.models.user import User
-from arm.ui.forms import SetupForm, DBUpdate
+import bcrypt
+from flask import (Blueprint, app, flash, redirect, render_template, request,
+                   session)
+from flask_login import (LoginManager, current_user,  # noqa: F401
+                         login_required, login_user, logout_user)
+
 import arm.ui.utils as ui_utils
+from arm.models.user import User
+from arm.ui import app, constants, db  # noqa: F811
+from arm.ui.forms import DBUpdate, SetupForm
 
 route_auth = Blueprint('route_auth', __name__,
                        template_folder='templates',

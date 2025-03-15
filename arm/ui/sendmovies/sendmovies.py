@@ -4,11 +4,13 @@ Covers
 - send_movies [GET]
 """
 
-from flask_login import LoginManager, login_required  # noqa: F401
-from flask import render_template, request, Blueprint, session
+from __future__ import annotations
 
-from arm.ui import db
+from flask import Blueprint, render_template, request, session
+from flask_login import LoginManager, login_required  # noqa: F401
+
 from arm.models.job import Job
+from arm.ui import db
 
 route_sendmovies = Blueprint('route_sendmovies', __name__,
                              template_folder='templates',

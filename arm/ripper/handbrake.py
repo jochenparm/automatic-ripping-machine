@@ -1,12 +1,14 @@
 """Handbrake processing of dvd/blu-ray"""
 
-import os
+from __future__ import annotations
+
 import logging
-import subprocess
+import os
 import re
 import shlex
-import arm.config.config as cfg
+import subprocess
 
+import arm.config.config as cfg
 from arm.ripper import utils
 from arm.ui import app, db  # noqa E402
 

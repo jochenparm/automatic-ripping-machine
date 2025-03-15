@@ -6,18 +6,21 @@ Covers
 - import_movies [JSON]
 """
 
-import os
-import json
-import re
-from flask_login import LoginManager, login_required  # noqa: F401
-from flask import render_template, request, Blueprint, flash, redirect, session
+from __future__ import annotations
 
-import arm.ui.utils as ui_utils
-from arm.ui import app, db, constants
-from arm.models.job import Job
+import json
+import os
+import re
+
+from flask import Blueprint, flash, redirect, render_template, request, session
+from flask_login import LoginManager, login_required  # noqa: F401
+
 import arm.config.config as cfg
-from arm.ui.metadata import get_omdb_poster
+import arm.ui.utils as ui_utils
+from arm.models.job import Job
+from arm.ui import app, constants, db
 from arm.ui.forms import DBUpdate
+from arm.ui.metadata import get_omdb_poster
 
 app.app_context().push()
 route_database = Blueprint('route_database', __name__,

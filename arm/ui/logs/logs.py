@@ -6,15 +6,18 @@ Covers
 - logreader [GET]
 """
 
+from __future__ import annotations
+
 import os
 from pathlib import Path
+
+from flask import Blueprint, render_template, request, send_file, session
 from flask_login import LoginManager, login_required  # noqa: F401
-from flask import render_template, request, Blueprint, send_file, session
 from werkzeug.routing import ValidationError
 
+import arm.config.config as cfg
 import arm.ui.utils as ui_utils
 from arm.ui import app
-import arm.config.config as cfg
 
 route_logs = Blueprint('route_logs', __name__,
                        template_folder='templates',

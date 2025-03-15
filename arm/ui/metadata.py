@@ -1,12 +1,15 @@
 """Main file for interacting with omdb and tmdb"""
-import urllib
+from __future__ import annotations
+
 import json
 import re
+import urllib
+
 import requests
 from flask.logging import default_handler  # noqa: F401
 
-from arm.ui import app
 import arm.config.config as cfg
+from arm.ui import app
 
 TMDB_YEAR_REGEX = r"-\d{0,2}-\d{0,2}"
 

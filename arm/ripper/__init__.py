@@ -1,2 +1,3 @@
 # """ Allows us to import from arm.ripper folder"""
-from arm.ripper import logger, utils, makemkv, handbrake, identify, ARMInfo # noqa F401
+from arm.ripper import (ARMInfo, handbrake, identify, logger,  # noqa F401
+                        makemkv, utils)

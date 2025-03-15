@@ -6,13 +6,16 @@ Covers
 - arm_notification_close [GET}
 """
 
-from flask_login import login_required  # noqa: F401
-from flask import render_template, Blueprint, redirect, flash, session
+from __future__ import annotations
+
 from datetime import datetime
 
+from flask import Blueprint, flash, redirect, render_template, session
+from flask_login import login_required  # noqa: F401
+
 import arm.ui.utils as ui_utils
-from arm.ui import app
 from arm.models.notifications import Notifications
+from arm.ui import app
 
 route_notifications = Blueprint('route_notifications', __name__,
                                 template_folder='templates',

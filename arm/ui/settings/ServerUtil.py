@@ -3,11 +3,13 @@ Class definition
  Server - class for managing system utilisation
 """
 
+from __future__ import annotations
+
 import psutil
+from flask import flash
 
 import arm.config.config as cfg
 from arm.ui import app
-from flask import flash
 
 
 class ServerUtil():
@@ -37,7 +39,7 @@ class ServerUtil():
     def get_cpu_util(self):
         try:
             self.cpu_util = psutil.cpu_percent()
-        except EnvironmentError:
+        except OSError:
             self.cpu_util = 0
         app.logger.debug(f"Server CPU Util: {self.cpu_util}")
 
@@ -69,7 +71,7 @@ class ServerUtil():
             # cpu temperature - unknown devices
             else:
                 self.cpu_temp = 0
-        except EnvironmentError:
+        except OSError:
             self.cpu_temp = 0
         app.logger.debug(f"Server CPU Temp:  {self.cpu_temp}")
 
@@ -79,7 +81,7 @@ class ServerUtil():
             self.memory_free = round(memory.available / 1073741824, 1)
             self.memory_used = round(memory.used / 1073741824, 1)
             self.memory_percent = memory.percent
-        except EnvironmentError:
+        except OSError:
             self.memory_free = 0
             self.memory_used = 0
             self.memory_percent = 0

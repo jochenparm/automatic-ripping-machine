@@ -1,34 +1,37 @@
 """
 Main catch all page for functions for the A.R.M ui
 """
+from __future__ import annotations
+
 import hashlib
-import os
-import shutil
 import json
+import os
 import platform
-import subprocess
 import re
+import shutil
+import subprocess
 from datetime import datetime
 from pathlib import Path
-from sqlalchemy.exc import SQLAlchemyError
-from time import strftime, localtime, time, sleep
+from time import localtime, sleep, strftime, time
 
 import bcrypt
 import requests
-from werkzeug.routing import ValidationError
 from flask.logging import default_handler  # noqa: F401
 from flask_login import current_user
+from sqlalchemy.exc import SQLAlchemyError
+from werkzeug.routing import ValidationError
 
 import arm.config.config as cfg
-from arm.config.config_utils import arm_yaml_test_bool
 from arm.config import config_utils
+from arm.config.config_utils import arm_yaml_test_bool
 from arm.models.alembic_version import AlembicVersion
 from arm.models.job import Job
 from arm.models.system_info import SystemInfo
 from arm.models.ui_settings import UISettings
 from arm.models.user import User
 from arm.ui import app, db
-from arm.ui.metadata import tmdb_search, get_tmdb_poster, tmdb_find, call_omdb_api
+from arm.ui.metadata import (call_omdb_api, get_tmdb_poster, tmdb_find,
+                             tmdb_search)
 from arm.ui.settings import DriveUtils
 
 # Path definitions
@@ -70,10 +73,11 @@ def check_db_version(install_path, db_file):
     Check if db exists and is up-to-date.
     If it doesn't exist create it.  If it's out of date update it.
     """
-    from alembic.script import ScriptDirectory
-    from alembic.config import Config  # noqa: F811
     import sqlite3
+
     import flask_migrate
+    from alembic.config import Config  # noqa: F811
+    from alembic.script import ScriptDirectory
 
     mig_dir = os.path.join(install_path, path_migrations)
 
@@ -128,8 +132,8 @@ def arm_alembic_get():
     """
     Get the Alembic Head revision
     """
-    from alembic.script import ScriptDirectory
     from alembic.config import Config
+    from alembic.script import ScriptDirectory
 
     install_path = cfg.arm_config['INSTALLPATH']
 
@@ -349,7 +353,7 @@ def generate_comments():
     """
     comments_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "comments.json")
     try:
-        with open(comments_file, "r") as comments_read_file:
+        with open(comments_file) as comments_read_file:
             try:
                 comments = json.load(comments_read_file)
             except Exception as error:
@@ -371,7 +375,7 @@ def generate_full_log(full_path):
             while True:
                 yield read_log_file.read()
                 sleep(1)
-    except IOError:
+    except OSError:
         try:
             with open(full_path, encoding="utf8", errors='ignore') as read_log_file:
                 while True:
@@ -423,7 +427,7 @@ def setup_database():
         # UI config is already set within the alembic migration file - 9cae4aa05dd7_create_settingsui_table.py
         # Create default user to save problems with ui and ripper having diff setups
         hashed = bcrypt.gensalt(12)
-        default_user = User(email="admin", password=bcrypt.hashpw("password".encode('utf-8'), hashed), hashed=hashed)
+        default_user = User(email="admin", password=bcrypt.hashpw(b"password", hashed), hashed=hashed)
         app.logger.debug("DB Init - Admin user loaded")
         db.session.add(default_user)
         # Server config
@@ -551,8 +555,8 @@ def fix_permissions(j_id):
         os.chmod(directory_to_traverse, corrected_chmod_value)
         # If set media owner in arm.yaml was true set them as users
         if job.config.SET_MEDIA_OWNER and job.config.CHOWN_USER and job.config.CHOWN_GROUP:
-            import pwd
             import grp
+            import pwd
             uid = pwd.getpwnam(job.config.CHOWN_USER).pw_uid
             gid = grp.getgrnam(job.config.CHOWN_GROUP).gr_gid
             os.chown(directory_to_traverse, uid, gid)
@@ -615,7 +619,7 @@ def find_folder_in_log(job_log, default_directory):
     :param default_directory: full path to the final directory prebuilt
     :return: full path to the final directory prebuilt or found in log
     """
-    with open(job_log, 'r') as reader:
+    with open(job_log) as reader:
         for line in reader.readlines():
             failed_perms_found = re.search("Operation not permitted: '([0-9a-zA-Z()/ -]*?)'", str(line))
             if failed_perms_found:
@@ -920,7 +924,7 @@ def git_check_version():
             local_version = version_file.read().strip()
     except FileNotFoundError as e:
         app.logger.debug(f"Error - ARM Local Version file not found: {e}")
-    except IOError as e:
+    except OSError as e:
         app.logger.debug(f"Error - ARM Local Version file error: {e}")
 
     # Read the remote version from Git (without modifying local files)

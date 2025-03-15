@@ -2,6 +2,8 @@
 Function definition
   Wrapper for the python subprocess module
 """
+from __future__ import annotations
+
 import logging
 import subprocess
 

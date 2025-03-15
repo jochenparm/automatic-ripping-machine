@@ -1,32 +1,33 @@
 """Collection of utility functions"""
+from __future__ import annotations
+
 import datetime
-import os
-import sys
+import fcntl
 import logging
 import logging.handlers
-import fcntl
-import subprocess
-import shutil
-import time
+import os
 import random
 import re
+import shutil
+import subprocess
+import sys
+import time
 from pathlib import Path, PurePath
 
-import bcrypt
-import requests
 import apprise
+import bcrypt
 import psutil
-
-from netifaces import interfaces, ifaddresses, AF_INET
+import requests
+from netifaces import AF_INET, ifaddresses, interfaces
 
 import arm.config.config as cfg
-from arm.ui import db  # needs to be imported before models
 from arm.models.job import Job
 from arm.models.notifications import Notifications
+from arm.models.system_drives import SystemDrives
 from arm.models.track import Track
 from arm.models.user import User
-from arm.models.system_drives import SystemDrives
 from arm.ripper import apprise_bulk
+from arm.ui import db  # needs to be imported before models
 
 NOTIFY_TITLE = "ARM notification"
 
@@ -491,7 +492,7 @@ def try_add_default_user():
     """
     try:
         username = "admin"
-        pass1 = "password".encode('utf-8')
+        pass1 = b"password"
         hashed = bcrypt.gensalt(12)
         database_adder(User(email=username, password=bcrypt.hashpw(pass1, hashed), hashed=hashed))
         perm_file = Path(PurePath(cfg.arm_config['INSTALLPATH'], "installed"))
@@ -551,7 +552,7 @@ def arm_setup(arm_log):
         # Check db file is writeable
         if not os.access(cfg.arm_config['DBFILE'], os.W_OK):
             arm_log.error(f"Cant write to database file! Permission ERROR: {cfg.arm_config['DBFILE']} - ARM Will Fail!")
-            raise IOError
+            raise OSError
         # Check directories for read/write permission -> create if they don't exist
         for folder in arm_directories:
             if not os.access(folder, os.R_OK):
@@ -559,11 +560,11 @@ def arm_setup(arm_log):
                 arm_log.error(f"Cant read from folder, Permission ERROR: {folder} - ARM Will Fail!")
             if not os.access(folder, os.W_OK):
                 arm_log.error(f"Cant write to folder, Permission ERROR: {folder} - ARM Will Fail!")
-                raise IOError
+                raise OSError
             if make_dir(folder):
                 arm_log.error(f"Cant create folder: {folder} - ARM Will Fail!")
-                raise IOError
-    except IOError as error:
+                raise OSError
+    except OSError as error:
         arm_log.error(f"A fatal error has occurred. "
                       f"Cant find/create the folders set in arm.yaml - Error:{error} - ARM Will Fail!")
 

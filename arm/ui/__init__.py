@@ -1,17 +1,20 @@
 """Main arm ui file"""
-import sys  # noqa: F401
+from __future__ import annotations
+
 import os  # noqa: F401
+import sys  # noqa: F401
 from getpass import getpass  # noqa: F401
 from logging.config import dictConfig
-from flask import Flask, logging, current_app  # noqa: F401
+
+import bcrypt  # noqa: F401
+from flask import Flask, current_app, logging  # noqa: F401
 from flask.logging import default_handler  # noqa: F401
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
 from flask_cors import CORS
+from flask_login import LoginManager
+from flask_migrate import Migrate
+from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import CSRFProtect
 
-from flask_login import LoginManager
-import bcrypt  # noqa: F401
 import arm.config.config as cfg
 
 sqlitefile = 'sqlite:///' + cfg.arm_config['DBFILE']
@@ -64,16 +67,18 @@ app.logger.debug("Debugging pin: " + os.environ["WERKZEUG_DEBUG_PIN"])
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-# Register route blueprints
-# loaded post database declaration to avoid circular loops
-from arm.ui.settings.settings import route_settings  # noqa: E402,F811
-from arm.ui.logs.logs import route_logs  # noqa: E402,F811
 from arm.ui.auth.auth import route_auth  # noqa: E402,F811
 from arm.ui.database.database import route_database  # noqa: E402,F811
 from arm.ui.history.history import route_history  # noqa: E402,F811
 from arm.ui.jobs.jobs import route_jobs  # noqa: E402,F811
+from arm.ui.logs.logs import route_logs  # noqa: E402,F811
+from arm.ui.notifications.notifications import \
+    route_notifications  # noqa: E402,F811
 from arm.ui.sendmovies.sendmovies import route_sendmovies  # noqa: E402,F811
-from arm.ui.notifications.notifications import route_notifications  # noqa: E402,F811
+# Register route blueprints
+# loaded post database declaration to avoid circular loops
+from arm.ui.settings.settings import route_settings  # noqa: E402,F811
+
 app.register_blueprint(route_settings)
 app.register_blueprint(route_logs)
 app.register_blueprint(route_auth)
@@ -85,4 +90,5 @@ app.register_blueprint(route_notifications)
 
 # Remove GET/page loads from logging
 import logging  # noqa: E402,F811
+
 logging.getLogger('werkzeug').setLevel(logging.ERROR)

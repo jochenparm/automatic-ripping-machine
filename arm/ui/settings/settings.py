@@ -13,28 +13,30 @@ Covers
 - drive_remove [GET]
 - testapprise [GET]
 """
-import platform
+from __future__ import annotations
+
 import importlib
+import platform
 import re
 import subprocess
 from datetime import datetime
 
-from flask_login import login_required, \
-    current_user, login_user, UserMixin, logout_user  # noqa: F401
-from flask import render_template, request, flash, \
-    redirect, Blueprint, session
+from flask import Blueprint, flash, redirect, render_template, request, session
+from flask_login import (UserMixin, current_user, login_required,  # noqa: F401
+                         login_user, logout_user)
 
+import arm.config.config as cfg
+import arm.ripper.utils as ripper_utils
 import arm.ui.utils as ui_utils
-from arm.ui import app, db
 from arm.models.job import Job
 from arm.models.system_drives import SystemDrives
 from arm.models.system_info import SystemInfo
 from arm.models.ui_settings import UISettings
-import arm.config.config as cfg
+from arm.ui import app, db
+from arm.ui.forms import (AbcdeForm, SettingsForm, SystemInfoDrives,
+                          UiSettingsForm)
 from arm.ui.settings import DriveUtils
-from arm.ui.forms import SettingsForm, UiSettingsForm, AbcdeForm, SystemInfoDrives
 from arm.ui.settings.ServerUtil import ServerUtil
-import arm.ripper.utils as ripper_utils
 
 route_settings = Blueprint('route_settings', __name__,
                            template_folder='templates',

@@ -1,7 +1,10 @@
 """File to hold all functions pertaining to apprise"""
+from __future__ import annotations
+
 import logging
-import yaml
+
 import apprise
+import yaml
 
 
 # TODO: Refactor this to leverage apprise_config stored in config.py
@@ -81,7 +84,7 @@ def apprise_notify(apprise_cfg, title, body):
     :param body: the main body of the message
     :return: None
     """
-    with open(apprise_cfg, "r") as yaml_file:
+    with open(apprise_cfg) as yaml_file:
         cfg = yaml.safe_load(yaml_file)
 
     sent_cfg = build_apprise_sent(cfg)

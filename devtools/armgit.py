@@ -3,7 +3,10 @@ Automatic-Ripping-Machine Development Tools
     Flake quality checks
 """
 
+from __future__ import annotations
+
 import os
+
 import armui
 import log
 

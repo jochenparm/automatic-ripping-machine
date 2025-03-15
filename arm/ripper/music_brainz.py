@@ -1,17 +1,18 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 
 """Module to connect to A.R.M to MusicBrainz API"""
 
+from __future__ import annotations
+
 import logging
 import re
+
 import musicbrainzngs as mb
-import arm.config.config as cfg
-
-from discid import read, Disc
-
-from arm.ripper import utils as u
 import werkzeug
+from discid import Disc, read
+
+import arm.config.config as cfg
+from arm.ripper import utils as u
 
 werkzeug.cached_property = werkzeug.utils.cached_property
 

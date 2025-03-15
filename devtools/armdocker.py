@@ -3,6 +3,8 @@ Automatic-Ripping-Machine Development Tools
     Docker update and rebuild
 """
 
+from __future__ import annotations
+
 import armui
 import log
 

@@ -2,11 +2,12 @@
 Main code for setting up the logging for all of A.R.M
 Also triggers CD identification
 """
-# set up logging
+from __future__ import annotations
 
-import os
+# set up logging
 import logging
 import logging.handlers
+import os
 import time
 
 import arm.config.config as cfg

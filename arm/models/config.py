@@ -1,7 +1,8 @@
+from __future__ import annotations
+
 from prettytable import PrettyTable
 
 from arm.ui import db
-
 
 hidden_attribs = ("OMDB_API_KEY", "EMBY_USERID", "EMBY_PASSWORD",
                   "EMBY_API_KEY", "PB_KEY", "IFTTT_KEY", "PO_KEY",

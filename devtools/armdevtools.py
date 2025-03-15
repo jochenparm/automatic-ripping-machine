@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 
 """
 Automatic-Ripping-Machine Development Tools
@@ -17,11 +16,13 @@ Automatic-Ripping-Machine Development Tools
     *************************************************************************************
 """
 
+from __future__ import annotations
+
 import argparse
 
+import armdocker
 import armgit
 import database
-import armdocker
 
 __version__ = '0.3'
 arm_home = "/home/arm"
@@ -51,7 +52,7 @@ parser.add_argument("-pr",
                     action="store_true")
 parser.add_argument("-v", help="ARM Dev Tools Version",
                     action='version',
-                    version='%(prog)s {version}'.format(version=__version__))
+                    version=f'%(prog)s {__version__}')
 
 args = parser.parse_args()
 # -b move to branch

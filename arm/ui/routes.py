@@ -9,22 +9,25 @@ Other routes handled in flask blueprints
 - auth, database, history, jobs, logs, sendmovies, settings
 """
 
-import os
-import json
-from pathlib import Path, PurePath
-from werkzeug.exceptions import HTTPException
-from flask import Flask, render_template, request, flash, \
-    redirect, url_for, session   # noqa: F401
-from flask.logging import default_handler  # noqa: F401
-from flask_login import LoginManager, login_required, \
-    current_user, login_user, logout_user  # noqa: F401
+from __future__ import annotations
 
+import json
+import os
+from pathlib import Path, PurePath
+
+from flask import (Flask, flash, redirect, render_template,  # noqa: F401
+                   request, session, url_for)
+from flask.logging import default_handler  # noqa: F401
+from flask_login import (LoginManager, current_user,  # noqa: F401
+                         login_required, login_user, logout_user)
+from werkzeug.exceptions import HTTPException
+
+import arm.config.config as cfg
 import arm.ui.utils as ui_utils
-from arm.ui import app, db, constants
 from arm.models.job import Job
 from arm.models.system_info import SystemInfo
 from arm.models.user import User
-import arm.config.config as cfg
+from arm.ui import app, constants, db
 from arm.ui.forms import DBUpdate
 from arm.ui.settings.ServerUtil import ServerUtil
 from arm.ui.settings.settings import check_hw_transcode_support

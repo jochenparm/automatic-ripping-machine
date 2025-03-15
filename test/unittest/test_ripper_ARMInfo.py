@@ -1,10 +1,12 @@
+from __future__ import annotations
+
+import sqlite3
+import sys
 import unittest
 from unittest.mock import MagicMock, mock_open, patch
-import sys
-import sqlite3
 
 sys.path.insert(0, '/opt/arm')
-from arm.ripper.ARMInfo import ARMInfo   # noqa E402
+from arm.ripper.ARMInfo import ARMInfo  # noqa E402
 
 
 class TestArmInfo(unittest.TestCase):

@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 
 """Main run page for armui"""
+from __future__ import annotations
+
 import os  # noqa: F401
 import sys
 
@@ -9,8 +10,8 @@ import sys
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 
 import arm.config.config as cfg  # noqa E402
-from arm.ui import app  # noqa E402
 import arm.ui.routes  # noqa E402
+from arm.ui import app  # noqa E402
 
 
 def is_docker():
@@ -29,7 +30,7 @@ host = cfg.arm_config['WEBSERVER_IP']
 # Check if auto ip address 'x.x.x.x' or if inside docker - set internal ip from host and use WEBSERVER_IP for notify
 if host == 'x.x.x.x' or is_docker():
     # autodetect host IP address
-    from netifaces import interfaces, ifaddresses, AF_INET
+    from netifaces import AF_INET, ifaddresses, interfaces
     ip_list = []
     for interface in interfaces():
         inet_links = ifaddresses(interface).get(AF_INET, [])

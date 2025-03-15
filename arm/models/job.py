@@ -1,18 +1,20 @@
+from __future__ import annotations
+
 import logging
 import os
-import psutil
-import pyudev
 import subprocess
 import time
 
+import psutil
+import pyudev
 from prettytable import PrettyTable
-from arm.ripper import music_brainz
-from arm.ui import db
-import arm.config.config as cfg
 
+import arm.config.config as cfg
+from arm.models.config import Config  # noqa: F401
 # THESE IMPORTS ARE REQUIRED FOR THE db.Relationships to work
 from arm.models.track import Track  # noqa: F401
-from arm.models.config import Config  # noqa: F401
+from arm.ripper import music_brainz
+from arm.ui import db
 
 
 class Job(db.Model):

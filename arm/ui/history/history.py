@@ -4,14 +4,17 @@ Covers
 - history [GET]
 """
 
-import os
-from flask_login import LoginManager, login_required  # noqa: F401
-from flask import render_template, request, Blueprint, session
+from __future__ import annotations
 
-import arm.ui.utils as ui_utils
-from arm.ui import app, db
-from arm.models.job import Job
+import os
+
+from flask import Blueprint, render_template, request, session
+from flask_login import LoginManager, login_required  # noqa: F401
+
 import arm.config.config as cfg
+import arm.ui.utils as ui_utils
+from arm.models.job import Job
+from arm.ui import app, db
 
 route_history = Blueprint('route_history', __name__,
                           template_folder='templates',

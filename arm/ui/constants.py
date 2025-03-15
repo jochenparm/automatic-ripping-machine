@@ -1,5 +1,7 @@
 """ARM Constants"""
 # UI
+from __future__ import annotations
+
 HOME_PAGE = '/index'
 ERROR_PAGE = 'error.html'
 ERROR_REDIRECT = "/error"

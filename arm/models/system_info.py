@@ -1,7 +1,10 @@
+from __future__ import annotations
+
 import platform
-import psutil
 import re
 import subprocess
+
+import psutil
 
 from arm.ui import db
 
@@ -64,5 +67,5 @@ class SystemInfo(db.Model):
         try:
             memory = psutil.virtual_memory()
             self.mem_total = round(memory.total / 1073741824, 1)
-        except EnvironmentError:
+        except OSError:
             self.mem_total = 0

@@ -1,7 +1,10 @@
 #!/usr/bin/python3
 """yaml config loader"""
+from __future__ import annotations
+
 import json
 import os
+
 import yaml
 
 import arm.config.config_utils as config_utils
@@ -13,13 +16,13 @@ apprise_config_path = os.path.join(CONFIG_LOCATION, "apprise.yaml")
 
 
 def _load_config(fp):
-    with open(fp, "r") as yaml_file:
+    with open(fp) as yaml_file:
         config = yaml.safe_load(yaml_file)
     return config
 
 
 def _load_abcde(fp):
-    with open(fp, "r") as abcde_read_file:
+    with open(fp) as abcde_read_file:
         config = abcde_read_file.read()
     return config
 
@@ -38,7 +41,7 @@ if len(cur_cfg) != len(new_cfg):
             new_cfg[key] = cur_cfg[key]
 
     # 4. Save the dictionary
-    with open("/opt/arm/arm/ui/comments.json", "r") as comments_file:
+    with open("/opt/arm/arm/ui/comments.json") as comments_file:
         comments = json.load(comments_file)
 
     arm_cfg = comments['ARM_CFG_GROUPS']['BEGIN'] + "\n\n"

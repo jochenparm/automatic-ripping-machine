@@ -2,14 +2,17 @@
 Class definition
  ARM system information and version numbers
 """
-import os
-import sys
-import re
+from __future__ import annotations
+
 import getpass  # noqa E402
 import logging  # noqa: E402
+import os
+import re
 import sqlite3
-from alembic.script import ScriptDirectory
+import sys
+
 from alembic.config import Config
+from alembic.script import ScriptDirectory
 
 from arm.ripper import ProcessHandler
 
@@ -67,7 +70,7 @@ class ARMInfo:
             try:
                 self.arm_version = version_file.read().strip()
 
-            except (OSError, IOError) as e:
+            except OSError as e:
                 logging.info(f"ARM Version error: {e}")
                 self.arm_version = "unknown"
 

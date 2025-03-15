@@ -5,8 +5,9 @@ Revises: 9cae4aa05dd7
 Create Date: 2021-03-19 19:22:53.502215
 
 """
-from alembic import op
+from __future__ import annotations
 
+from alembic import op
 
 # revision identifiers, used by Alembic.
 revision = '6dfe7244b18e'

@@ -1,17 +1,19 @@
 """
 Main file for dealing with connecting to MakeMKV and handling errors
 """
-import os
+from __future__ import annotations
+
 import logging
-import subprocess
+import os
 import shlex
+import subprocess
 from time import sleep
 
+import arm.config.config as cfg  # noqa E402
 from arm.models.track import Track
 from arm.ripper import utils  # noqa: E402
-from arm.ui import db  # noqa: F401, E402
-import arm.config.config as cfg  # noqa E402
 from arm.ripper.utils import notify
+from arm.ui import db  # noqa: F401, E402
 
 
 class MakeMkvRuntimeError(RuntimeError):

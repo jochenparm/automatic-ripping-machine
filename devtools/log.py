@@ -3,6 +3,8 @@ Automatic-Ripping-Machine Development Tools
     log to cli and file manager
 """
 
+from __future__ import annotations
+
 from colorama import Fore, Style
 
 

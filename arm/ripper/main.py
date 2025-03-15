@@ -1,35 +1,37 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 
 """
 The main runner for Automatic Ripping Machine
 
 For help please visit https://github.com/automatic-ripping-machine/automatic-ripping-machine
 """
-import sys
+from __future__ import annotations
+
 import argparse  # noqa: E402
-import os  # noqa: E402
+import datetime  # noqa: E402
+import getpass  # noqa E402
 import logging  # noqa: E402
 import logging.handlers  # noqa: E402
-import time  # noqa: E402
-import datetime  # noqa: E402
+import os  # noqa: E402
 import re  # noqa: E402
-import getpass  # noqa E402
-import pyudev  # noqa: E402
+import sys
+import time  # noqa: E402
+
 import psutil  # noqa E402
+import pyudev  # noqa: E402
 
 # set the PATH to /opt/arm so we can handle imports properly
 sys.path.append("/opt/arm")
 
-from arm.ripper import logger, utils, identify, arm_ripper, music_brainz  # noqa: E402
 import arm.config.config as cfg  # noqa E402
 from arm.models.config import Config  # noqa: E402
 from arm.models.job import Job  # noqa: E402
 from arm.models.system_drives import SystemDrives  # noqa: E402
-from arm.ui import app, db, constants  # noqa E402
-from arm.ui.settings import DriveUtils as drive_utils # noqa E402
-import arm.config.config as cfg  # noqa E402
+from arm.ripper import (arm_ripper, identify, logger,  # noqa: E402
+                        music_brainz, utils)
 from arm.ripper.ARMInfo import ARMInfo  # noqa E402
+from arm.ui import app, constants, db  # noqa E402
+from arm.ui.settings import DriveUtils as drive_utils  # noqa E402
 
 
 def entry():
@@ -81,7 +83,7 @@ def check_fstab():
     # todo: remove this from the ripper and add into the ARM UI with a warning
     """
     logging.info("Checking for fstab entry.")
-    with open('/etc/fstab', 'r') as fstab:
+    with open('/etc/fstab') as fstab:
         lines = fstab.readlines()
         for line in lines:
             # Now grabs the real uncommented fstab entry

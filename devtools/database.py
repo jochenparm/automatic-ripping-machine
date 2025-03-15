@@ -3,10 +3,13 @@ Automatic-Ripping-Machine Development Tools
     ARM UI management tools
 """
 
+from __future__ import annotations
+
+import datetime
 import os
+
 import armui
 import log
-import datetime
 
 # DB variables
 arm_home = "/home/arm"

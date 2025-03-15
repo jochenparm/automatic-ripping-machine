@@ -1,10 +1,12 @@
+from __future__ import annotations
+
+import subprocess
 import sys
 import unittest
 from unittest.mock import patch
-import subprocess
 
 sys.path.insert(0, '/opt/arm')
-from arm.ripper.ProcessHandler import arm_subprocess    # noqa: E402
+from arm.ripper.ProcessHandler import arm_subprocess  # noqa: E402
 
 
 class TestProcessHandler(unittest.TestCase):

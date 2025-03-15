@@ -13,17 +13,21 @@ Covers
 - json [JSON GET]
 """
 
+from __future__ import annotations
+
 import json
-from flask_login import LoginManager, login_required, current_user  # noqa: F401
-from flask import render_template, request, Blueprint, flash, redirect, url_for
+
+from flask import Blueprint, flash, redirect, render_template, request, url_for
+from flask_login import (LoginManager, current_user,  # noqa: F401
+                         login_required)
 from werkzeug.routing import ValidationError
 
+import arm.config.config as cfg
 import arm.ui.utils as ui_utils
-from arm.ui import app, db, constants, json_api
 from arm.models.job import Job
 from arm.models.notifications import Notifications
-import arm.config.config as cfg
-from arm.ui.forms import TitleSearchForm, ChangeParamsForm, TrackFormDynamic
+from arm.ui import app, constants, db, json_api
+from arm.ui.forms import ChangeParamsForm, TitleSearchForm, TrackFormDynamic
 
 route_jobs = Blueprint('route_jobs', __name__,
                        template_folder='templates',
